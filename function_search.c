@@ -2,11 +2,14 @@
 int function_search(char **argv)
 {
 	char *directory;
+	char *temp;
 	char path[1024];
 	pid_t pid;
 	
-	if ((directory = getenv("PATH")) == NULL)
+	if ((temp = getenv("PATH")) == NULL)
 		return (1);
+	directory = malloc(strlen(temp) + 1 * sizeof(char));
+	strcpy(directory, temp);
 	directory = strtok(directory, ":");
 
 	while (directory != NULL)
