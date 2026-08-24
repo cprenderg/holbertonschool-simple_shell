@@ -10,7 +10,6 @@ typedef struct command_s{
     void (*function)(void);
 } command_t;
 
-//void exit_func();
 void ls_func();
 void printbanner(void);
 char *line_reader(void);
