@@ -6,12 +6,16 @@ int main(int ac, char **av)
 	char exit[] = "exit";
 	int command_table_size;
 	int i;
-	char *arguments[] = {"l", NULL};
+	char *token;
+	char **argv;
+	int argc;
+	char *temp;
 
 	printbanner();
 	static const command_t command_table[] = {
 		{"exit", exit_func},
-		{"ls", ls_func}
+		{"ls", ls_func},
+		{"cd", cd_func}
 	};
 	command_table_size = sizeof(command_table) / sizeof(command_table[0]);
 
@@ -23,14 +27,34 @@ int main(int ac, char **av)
 			user_input_len = strlen(user_input);
 			user_input[user_input_len - 1] = '\0';
 		}
-		
-		printf("%s\n", user_input);
+		temp = strdup(user_input);
+		/* Getting argc */
+		argc = 0;
+		token = strtok(user_input, " ");
+		while (token != NULL)
+		{
+			argc++;
+			token = strtok(NULL, " ");
+		}
+		argv = malloc((argc + 1) * sizeof(char *));
+		/* Converting temp into tokens? */
+		token = strtok(temp, " ");
+		i = 0;
+		while (token != NULL)
+		{
+			argv[i] = token;
+			/* strtok continues from the previous word */
+			token = strtok(NULL, " ");
+			i++;
+		}
+		argv[i] = NULL;
+
 		i = 0;
 		while (i < command_table_size)
 		{
 			if (strcmp(user_input, command_table[i].command) == 0)
 				{
-					command_table[i].function(1, arguments);
+					command_table[i].function(argc, argv);
 					break;
 				}
 			i++;
