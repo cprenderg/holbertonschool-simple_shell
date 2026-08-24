@@ -52,7 +52,7 @@ int main(int ac, char **av)
 		i = 0;
 		while (i < command_table_size)
 		{
-			if (strcmp(user_input, command_table[i].command) == 0)
+			if (strcmp(argv[0], command_table[i].command) == 0)
 				{
 					command_table[i].function(argc, argv);
 					break;
