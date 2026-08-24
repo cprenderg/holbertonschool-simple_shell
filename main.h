@@ -14,7 +14,7 @@ typedef struct command_s{
 
 void printbanner(void);
 char *line_reader(void);
-int exit_func();
+int exit_func(int argc, char **argv);
 int ls_func(int argc, char **argv);
 void quick_sort(char **array, size_t size);
 
