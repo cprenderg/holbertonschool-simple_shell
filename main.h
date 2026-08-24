@@ -7,12 +7,16 @@
 
 typedef struct command_s{
     char *command;
-    void (*function)(void);
+    int (*function)(int argc, char **argv);
 } command_t;
+
 
 void ls_func();
 void printbanner(void);
 char *line_reader(void);
-void exit_func();
+int exit_func();
+int ls_func(int argc, char **argv);
+void quick_sort(char **array, size_t size);
+
 
 #endif
