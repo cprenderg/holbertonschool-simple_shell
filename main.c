@@ -48,9 +48,14 @@ int main(int ac, char **av)
 			i++;
 		}
 		argv[i] = NULL;
-
 		i = 0;
-		while (i < command_table_size)
+		if (function_search(argv) == 1)
+		{
+			printf("argc : %i", argc);
+			printf("Command execution failed");
+			i = 1;
+		}
+		while (i < command_table_size && i != 1)
 		{
 			if (strcmp(argv[0], command_table[i].command) == 0)
 				{
@@ -67,6 +72,8 @@ int main(int ac, char **av)
 		{
 			break;
 		}
+		free(argv);
+		user_input = NULL;
 	}
 	printf("You said to exit\n");
 	return (0);

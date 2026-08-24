@@ -18,7 +18,7 @@ char *line_reader(void);
 int exit_func(int argc, char **argv);
 int ls_func(int argc, char **argv);
 void quick_sort(char **array, size_t size);
-int function_search(int argc, char **argv);
+int function_search(char **argv);
 
 
 #endif
