@@ -11,7 +11,7 @@ typedef struct command_s{
 } command_t;
 
 
-void ls_func();
+
 void printbanner(void);
 char *line_reader(void);
 int exit_func();

@@ -1,5 +1,6 @@
 #include "main.h"
-void exit_func()
+int exit_func()
 {
 	printf("you said exit\n");
+	return (0);
 }
