@@ -5,7 +5,7 @@ int function_search(char **argv)
 	char path[1024];
 	pid_t pid;
 	
-	if ((directory = getenv("PATH")) == NULL)
+	if (directory = getenv("PATH") == NULL)
 		return (1);
 	directory = strtok(directory, ":");
 

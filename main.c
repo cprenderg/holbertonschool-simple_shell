@@ -72,9 +72,8 @@ int main(int ac, char **av)
 		{
 			break;
 		}
-		free(argv);
-		user_input = NULL;
 	}
 	printf("You said to exit\n");
+	
 	return (0);
 }
