@@ -6,12 +6,12 @@ int main(int ac, char **av)
 	char exit[] = "exit";
 	int command_table_size;
 	int i;
+	char *arguments[] = {"l", NULL};
 
 	printbanner();
 	static const command_t command_table[] = {
 		{"exit", exit_func},
 		{"ls", ls_func}
-		
 	};
 	command_table_size = sizeof(command_table) / sizeof(command_table[0]);
 
@@ -30,7 +30,7 @@ int main(int ac, char **av)
 		{
 			if (strcmp(user_input, command_table[i].command) == 0)
 				{
-					command_table[i].function();
+					command_table[i].function(1, arguments);
 					break;
 				}
 			i++;
