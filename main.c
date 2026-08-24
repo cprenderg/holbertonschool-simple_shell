@@ -52,7 +52,7 @@ int main(int ac, char **av)
 		if (function_search(argv) == 1)
 		{
 			printf("argc : %i", argc);
-			printf("Command execution failed");
+			printf("Command execution failed\n");
 			i = 1;
 		}
 		while (i < command_table_size && i != 1)
@@ -72,6 +72,9 @@ int main(int ac, char **av)
 		{
 			break;
 		}
+		i = 0;
+		free(argv);
+		user_input = NULL;
 	}
 	printf("You said to exit\n");
 	
