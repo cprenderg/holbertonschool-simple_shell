@@ -36,8 +36,8 @@ int main(int ac, char **av)
 			argc++;
 			token = strtok(NULL, " ");
 		}
+		/* Creating argv */
 		argv = malloc((argc + 1) * sizeof(char *));
-		/* Converting temp into tokens? */
 		token = strtok(temp, " ");
 		i = 0;
 		while (token != NULL)
