@@ -5,9 +5,10 @@
 #include <stdlib.h>
 #include <unistd.h>
 #include <sys/wait.h>
+/*
 #include <readline/readline.h>
 #include <readline/history.h>
-
+*/
 typedef struct command_s{
     char *command;
     int (*function)(int argc, char **argv);
