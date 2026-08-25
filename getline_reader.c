@@ -1,9 +1,9 @@
 #include "main.h"
 /**
-*line_reader - reads the standard input
+*getline_reader - reads the standard input
 *Return: pointer to string 
 */
-char *line_reader(void)
+char *getline_reader(void)
 {
 	char *buffer;
 	char directory_path[1024];

@@ -12,7 +12,7 @@ char *readline_reader(void)
 	getcwd(directory_path, sizeof(directory_path));
 	printf("%s", directory_path);
 	
-	buffer = NULL; // setting to NULL means getline will allocate the size
+	buffer = NULL; // setting to NULL means readline will allocate the size
 	buffer = readline("$ ");
 	if (buffer == NULL)
 	{ //Is true if there was no input to read
