@@ -7,10 +7,12 @@ int main(void)
 {
 	char *user_input, **argv, directory_path[1024];
 	int i, argc, command, user_input_len, command_table_size, interactive;
+	historylist_t *history_head;
 
 	printbanner();	
 	command_table_size = sizeof(command_table) / sizeof(command_table[0]);
 	interactive = isatty(STDIN_FILENO);
+	history_head = NULL;
 	while (1)
 	{
 		if (interactive)
@@ -19,6 +21,8 @@ int main(void)
 			printf("%s$ ", directory_path);
 		}
 		user_input = getline_reader();
+		history_head = history_func(user_input, history_head);
+
 		if (user_input != NULL)
 		{
 			user_input_len = strlen(user_input);
@@ -32,6 +36,11 @@ int main(void)
 		argv = get_argv(argc, user_input);/* Creating argv */
 		i = 0;
 		command = 0;
+		if (strcmp(argv[0], "history") == 0)
+		{
+			print_history(history_head);
+			command = 1;
+		}
 		while (i < command_table_size)
 		{
 			if (strcmp(argv[0], command_table[i].command) == 0)
