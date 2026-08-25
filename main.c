@@ -54,34 +54,29 @@ int main(int ac, char **av)
 		{
 			if (strcmp(argv[0], command_table[i].command) == 0)
 			{
+				if (strcmp(argv[0], "exit") == 0)
+				{
+					free(argv);
+					free(temp);
+					free(user_input);
+				}
 				command_table[i].function(argc, argv);
 				command = 1;
 				break;
 			}
 			i++;
 		}
-		if (strcmp(user_input, exit) == 0)
-		{
-			free(argv);
-			free(temp);
-			free(user_input);
-			break;
-		}
-		i = 0;
 		if (command == 0)
 		{
 			if ((function_search(argv)) == 1)
 			{
 				printf("Command execution failed\n");
-				i = 1;
 			}
 		}
 
 		free(argv);
 		free(temp);
 		free(user_input);
-		user_input = NULL;
-		i = 0;
 	}
 	printf("(main) You said to exit\n");
 	
