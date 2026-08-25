@@ -5,6 +5,8 @@
 #include <stdlib.h>
 #include <unistd.h>
 #include <sys/wait.h>
+#include <readline/readline.h>
+#include <readline/history.h>
 
 typedef struct command_s{
     char *command;
@@ -14,10 +16,11 @@ typedef struct command_s{
 
 int cd_func(int argc, char **argv);
 void printbanner(void);
-char *line_reader(void);
+char *getline_reader(void);
 int exit_func(int argc, char **argv);
 void quick_sort(char **array, size_t size);
 int function_search(char **argv);
+char *readline_reader(void);
 
 
 #endif

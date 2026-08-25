@@ -30,7 +30,7 @@ int function_search(char **argv)
 	if (pid == 0)
 	{
 		execv(path, argv);
-		return (1);
+		_exit(1);
 	}
 	else if (pid == -1)
 		return (1);
