@@ -9,7 +9,6 @@
  */
 int cd_func(int argc, char **argv)
 {
-	printf("is this hapening");
     if (argc != 2)
     {
         /* fprintf chooses where output is printed */
