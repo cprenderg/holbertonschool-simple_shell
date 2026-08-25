@@ -4,6 +4,7 @@ int function_search(char **argv)
 	char *directory;
 	char *temp;
 	char path[1024];
+	int found = 0;
 	pid_t pid;
 	
 	if ((temp = getenv("PATH")) == NULL)
@@ -16,10 +17,14 @@ int function_search(char **argv)
 	{
 		sprintf(path,"%s/%s", directory, argv[0]);
 		if (access(path, X_OK) == 0)
+		{
+			found = 1;
 			break;
+		}
 		directory = strtok(NULL, ":");
 	}
-	pid = fork();
+	if (found == 1)
+		pid = fork();
 	if (pid == 0)
 	{
 		execv(path, argv);
