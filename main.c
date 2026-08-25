@@ -10,6 +10,7 @@ int main(int ac, char **av)
 	char **argv;
 	int argc;
 	char *temp;
+	int command;
 
 	printbanner();
 	static const command_t command_table[] = {
@@ -48,11 +49,13 @@ int main(int ac, char **av)
 		}
 		argv[i] = NULL;
 		i = 0;
+		command = 0;
 		while (i < command_table_size)
 		{
 			if (strcmp(argv[0], command_table[i].command) == 0)
 			{
 				command_table[i].function(argc, argv);
+				command = 1;
 				break;
 			}
 			i++;
@@ -65,13 +68,14 @@ int main(int ac, char **av)
 			break;
 		}
 		i = 0;
-		int check = 0;
-		if ((check = function_search(argv)) == 1)
+		if (command == 0)
 		{
-			printf("Command execution failed\n");
-			i = 1;
+			if ((function_search(argv)) == 1)
+			{
+				printf("Command execution failed\n");
+				i = 1;
+			}
 		}
-		else if (check == 0)
 
 		free(argv);
 		free(temp);
