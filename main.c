@@ -1,12 +1,11 @@
 #include "main.h"
-
 static const command_t command_table[] = {
 		{"exit", exit_func},
 		{"cd", cd_func}
 	};
 int main(void)
 {
-	char *user_input, *token, *temp, **argv;
+	char *user_input, **argv;
 	int i, argc, command, user_input_len, command_table_size;
 
 	printbanner();	
@@ -20,11 +19,8 @@ int main(void)
 			user_input_len = strlen(user_input);
 			user_input[user_input_len - 1] = '\0';
 		}
-
-		/* Getting argc */
-		argc = get_argc(user_input);
-		/* Creating argv */
-		argv = get_argv(argc, user_input);
+		argc = get_argc(user_input);/* Getting argc */
+		argv = get_argv(argc, user_input);/* Creating argv */
 		i = 0;
 		command = 0;
 		while (i < command_table_size)
@@ -45,14 +41,11 @@ int main(void)
 		}
 		if (command == 0)
 		{
-			printf("function searching\n");
 			if ((function_search(argv)) == 1)
 				printf("Command execution failed\n");
 		}
 		free(argv);
 		free(user_input);
 	}
-	printf("(main) You said to exit\n");
-
 	return (0);
 }
