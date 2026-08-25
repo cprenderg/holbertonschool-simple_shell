@@ -21,6 +21,8 @@ int exit_func(int argc, char **argv);
 void quick_sort(char **array, size_t size);
 int function_search(char **argv);
 char *readline_reader(void);
+int get_argc(char *user_input);
+char **get_argv(int argc, char *user_input);
 
 
 #endif
