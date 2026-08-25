@@ -1,22 +1,17 @@
 #include "main.h"
-int main(int ac, char **av)
-{
-	char *user_input;
-	int user_input_len;
-	char exit[] = "exit";
-	int command_table_size;
-	int i;
-	char *token;
-	char **argv;
-	int argc;
-	char *temp;
-	int command;
 
-	printbanner();
-	static const command_t command_table[] = {
+static const command_t command_table[] = {
 		{"exit", exit_func},
 		{"cd", cd_func}
 	};
+int main(void)
+{
+	char *user_input, *token, *temp, **argv;
+	int i, argc, command, user_input_len, command_table_size;
+
+
+	printbanner();
+	
 	command_table_size = sizeof(command_table) / sizeof(command_table[0]);
 	printf("This should print first\n");
 	while (1)
@@ -28,23 +23,21 @@ int main(int ac, char **av)
 			user_input[user_input_len - 1] = '\0';
 		}
 		temp = strdup(user_input);
-		/* Getting argc */
-		argc = 0;
+
+		argc = 0; /* Getting argc */
 		token = strtok(user_input, " ");
 		while (token != NULL)
 		{
 			argc++;
 			token = strtok(NULL, " ");
 		}
-		/* Creating argv */
-		argv = malloc((argc + 1) * sizeof(char *));
+		argv = malloc((argc + 1) * sizeof(char *));/* Creating argv */
 		token = strtok(temp, " ");
 		i = 0;
 		while (token != NULL)
 		{
 			argv[i] = token;
-			/* strtok continues from the previous word */
-			token = strtok(NULL, " ");
+			token = strtok(NULL, " ");/* strtok continues from the previous word */
 			i++;
 		}
 		argv[i] = NULL;

@@ -12,13 +12,13 @@ char *getline_reader(void)
 	getcwd(directory_path, sizeof(directory_path));
 	printf("%s$ ", directory_path);
 	
-	buffer = NULL; // setting to NULL means getline will allocate the size
+	buffer = NULL; /* setting to NULL means getline will allocate the size*/
 	if (getline(&buffer, &buffersize, stdin) == -1)
 	{
-		if (feof(stdin)) //Is true if there was no input to read
+		if (feof(stdin)) /*Is true if there was no input to read*/
 			printf("Error no input to read");
 
-		else //any other fail
+		else /*any other fail*/
 			printf("Getline failed");
 
 		free(buffer);

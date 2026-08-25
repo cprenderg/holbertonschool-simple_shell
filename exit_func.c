@@ -1,5 +1,9 @@
 #include "main.h"
 int exit_func(int argc, char **argv)
 {
-	exit (0);
+	if(argc > 1)
+		return(1);
+	if (strcmp(argv[0], "exit") == 0)
+		exit (0);
+	return(1);
 }

@@ -20,4 +20,5 @@ int cd_func(int argc, char **argv)
         perror("cd");
         return (1);
     }
+	return (0);
 }
