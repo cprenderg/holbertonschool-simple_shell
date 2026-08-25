@@ -20,25 +20,11 @@ int main(void)
 			user_input_len = strlen(user_input);
 			user_input[user_input_len - 1] = '\0';
 		}
-		temp = strdup(user_input);
 
-		argc = 0; /* Getting argc */
-		token = strtok(user_input, " ");
-		while (token != NULL)
-		{
-			argc++;
-			token = strtok(NULL, " ");
-		}
-		argv = malloc((argc + 1) * sizeof(char *));/* Creating argv */
-		token = strtok(temp, " ");
-		i = 0;
-		while (token != NULL)
-		{
-			argv[i] = token;
-			token = strtok(NULL, " ");/* strtok continues from the previous word */
-			i++;
-		}
-		argv[i] = NULL;
+		/* Getting argc */
+		argc = get_argc(user_input);
+		/* Creating argv */
+		argv = get_argv(argc, user_input);
 		i = 0;
 		command = 0;
 		while (i < command_table_size)
@@ -48,8 +34,8 @@ int main(void)
 				if (strcmp(argv[0], "exit") == 0)
 				{
 					free(argv);
-					free(temp);
 					free(user_input);
+					exit (0); /* felix please fix this*/
 				}
 				command_table[i].function(argc, argv);
 				command = 1;
@@ -59,11 +45,11 @@ int main(void)
 		}
 		if (command == 0)
 		{
+			printf("function searching\n");
 			if ((function_search(argv)) == 1)
 				printf("Command execution failed\n");
 		}
 		free(argv);
-		free(temp);
 		free(user_input);
 	}
 	printf("(main) You said to exit\n");
