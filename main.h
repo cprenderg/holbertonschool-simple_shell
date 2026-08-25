@@ -15,6 +15,12 @@ typedef struct command_s{
     int (*function)(int argc, char **argv);
 } command_t;
 
+typedef struct historylist_s{
+    int id;
+    char *user_input;
+    struct historylist_s *next;
+    struct historylist_s *prev;
+} historylist_t;
 
 int cd_func(int argc, char **argv);
 void printbanner(void);
@@ -26,6 +32,8 @@ char *readline_reader(void);
 int get_argc(char *user_input);
 char **get_argv(int argc, char *user_input);
 void no_sigint(int);
+historylist_t *history_func(char *user_input, historylist_t *head);
+void print_history(historylist_t *head);
 
 
 #endif
