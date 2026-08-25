@@ -16,7 +16,6 @@ int cd_func(int argc, char **argv);
 void printbanner(void);
 char *line_reader(void);
 int exit_func(int argc, char **argv);
-int ls_func(int argc, char **argv);
 void quick_sort(char **array, size_t size);
 int function_search(char **argv);
 

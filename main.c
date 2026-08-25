@@ -14,11 +14,10 @@ int main(int ac, char **av)
 	printbanner();
 	static const command_t command_table[] = {
 		{"exit", exit_func},
-		{"ls", ls_func},
 		{"cd", cd_func}
 	};
 	command_table_size = sizeof(command_table) / sizeof(command_table[0]);
-
+	printf("This should print first\n");
 	while (1)
 	{
 		user_input = line_reader();
@@ -49,13 +48,13 @@ int main(int ac, char **av)
 		}
 		argv[i] = NULL;
 		i = 0;
-		while (i < command_table_size && i != 1)
+		while (i < command_table_size)
 		{
 			if (strcmp(argv[0], command_table[i].command) == 0)
-				{
-					command_table[i].function(argc, argv);
-					break;
-				}
+			{
+				command_table[i].function(argc, argv);
+				break;
+			}
 			i++;
 		}
 		if (strcmp(user_input, exit) == 0)
@@ -65,11 +64,13 @@ int main(int ac, char **av)
 			break;
 		}
 		i = 0;
-		if (function_search(argv) == 1)
+		int check = 0;
+		if ((check = function_search(argv)) == 1)
 		{
 			printf("Command execution failed\n");
 			i = 1;
 		}
+		else if (check == 0)
 
 		free(argv);
 		free(temp);
