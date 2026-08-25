@@ -20,12 +20,11 @@ int main(int ac, char **av)
 	printf("This should print first\n");
 	while (1)
 	{
-		user_input = line_reader();
-		if (user_input != NULL)
-		{
-			user_input_len = strlen(user_input);
-			user_input[user_input_len - 1] = '\0';
-		}
+		user_input = readline_reader();
+		//if (user_input != NULL)
+		//	user_input_len = strlen(user_input);
+		//	user_input[user_input_len - 1] = '\0';
+		//}
 		temp = strdup(user_input);
 		/* Getting argc */
 		argc = 0;
