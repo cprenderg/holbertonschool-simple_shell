@@ -8,6 +8,7 @@ static const command_t command_table[] = {
 void no_sigint(int needstobehere)
 {
 	char directory_path[1024];
+	getcwd(directory_path, sizeof(directory_path));
 	(void)needstobehere;
 	printf("\n%s$ ", directory_path);
 	fflush(stdout);
