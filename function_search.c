@@ -6,7 +6,7 @@ int function_search(char **argv)
 	char *token;
 	char path[1024];
 	int found = 0;
-	pid_t pid;
+	pid_t pid = -1;
 	
 	if ((temp = getenv("PATH")) == NULL)
 		return (1);
