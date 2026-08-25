@@ -5,14 +5,19 @@ static const command_t command_table[] = {
 	};
 int main(void)
 {
-	char *user_input, **argv;
-	int i, argc, command, user_input_len, command_table_size;
+	char *user_input, **argv, directory_path[1024];
+	int i, argc, command, user_input_len, command_table_size, interactive;
 
 	printbanner();	
 	command_table_size = sizeof(command_table) / sizeof(command_table[0]);
-	printf("This should print first\n");
+	interactive = isatty(STDIN_FILENO);
 	while (1)
 	{
+		if (interactive)
+		{
+			getcwd(directory_path, sizeof(directory_path)); /* printing prompt */
+			printf("%s$ ", directory_path);
+		}
 		user_input = getline_reader();
 		if (user_input != NULL)
 		{
@@ -29,9 +34,9 @@ int main(void)
 			{
 				if (strcmp(argv[0], "exit") == 0)
 				{
-					free(argv);
 					free(user_input);
-					exit (0); /* felix please fix this*/
+					free(argv);
+					exit (0); /* felix please help i dont know how to free because argv is attached to user_input */
 				}
 				command_table[i].function(argc, argv);
 				command = 1;
@@ -46,6 +51,10 @@ int main(void)
 		}
 		free(argv);
 		free(user_input);
+		if (!interactive)
+		{
+			exit (0);
+		}
 	}
 	return (0);
 }

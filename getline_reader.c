@@ -6,11 +6,7 @@
 char *getline_reader(void)
 {
 	char *buffer;
-	char directory_path[1024];
 	size_t buffersize;
-	
-	getcwd(directory_path, sizeof(directory_path));
-	printf("%s$ ", directory_path);
 	
 	buffer = NULL; /* setting to NULL means getline will allocate the size*/
 	if (getline(&buffer, &buffersize, stdin) == -1)
