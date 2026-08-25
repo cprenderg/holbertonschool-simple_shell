@@ -10,12 +10,10 @@ char **get_argv(int argc, char *user_input)
 {
 	char **argv;
 	char *token;
-	char *temp;
 	int i = 0;
 
 	argv = malloc((argc + 1) * sizeof(char *));
-	temp = strdup(user_input);
-	token = strtok(temp, " ");
+	token = strtok(user_input, " ");
 	while (token != NULL)
 	{
 		argv[i] = token;
