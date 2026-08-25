@@ -25,6 +25,10 @@ int main(void)
 			user_input[user_input_len - 1] = '\0';
 		}
 		argc = get_argc(user_input);/* Getting argc */
+		if (argc == 0) /* no user input so start loop again */
+		{
+			continue;
+		}
 		argv = get_argv(argc, user_input);/* Creating argv */
 		i = 0;
 		command = 0;
