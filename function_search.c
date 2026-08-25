@@ -29,6 +29,7 @@ int function_search(char **argv)
 		pid = fork();
 	if (pid == 0)
 	{
+		signal(SIGINT, SIG_DFL);
 		execv(path, argv);
 		_exit(1);
 	}

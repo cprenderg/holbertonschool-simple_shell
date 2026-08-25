@@ -5,6 +5,7 @@
 #include <stdlib.h>
 #include <unistd.h>
 #include <sys/wait.h>
+#include <signal.h>
 /*
 #include <readline/readline.h>
 #include <readline/history.h>
@@ -24,6 +25,7 @@ int function_search(char **argv);
 char *readline_reader(void);
 int get_argc(char *user_input);
 char **get_argv(int argc, char *user_input);
+void no_sigint(int);
 
 
 #endif

@@ -1,13 +1,25 @@
 #include "main.h"
+
+
 static const command_t command_table[] = {
 		{"exit", exit_func},
 		{"cd", cd_func}
 	};
+void no_sigint(int needstobehere)
+{
+	char directory_path[1024];
+	(void)needstobehere;
+	printf("\n%s$ ", directory_path);
+	fflush(stdout);
+}
 int main(void)
 {
-	char *user_input, **argv, directory_path[1024];
+	char *user_input, **argv;
 	int i, argc, command, user_input_len, command_table_size, interactive;
 
+	char directory_path[1024];
+
+	signal(SIGINT, no_sigint);
 	printbanner();	
 	command_table_size = sizeof(command_table) / sizeof(command_table[0]);
 	interactive = isatty(STDIN_FILENO);
@@ -15,7 +27,8 @@ int main(void)
 	{
 		if (interactive)
 		{
-			getcwd(directory_path, sizeof(directory_path)); /* printing prompt */
+			 /* printing prompt */
+			getcwd(directory_path, sizeof(directory_path));
 			printf("%s$ ", directory_path);
 		}
 		user_input = getline_reader();
@@ -26,9 +39,8 @@ int main(void)
 		}
 		argc = get_argc(user_input);/* Getting argc */
 		if (argc == 0) /* no user input so start loop again */
-		{
 			continue;
-		}
+
 		argv = get_argv(argc, user_input);/* Creating argv */
 		i = 0;
 		command = 0;
