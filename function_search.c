@@ -3,6 +3,7 @@ int function_search(char **argv)
 {
 	char *directory;
 	char *temp;
+	char *token;
 	char path[1024];
 	int found = 0;
 	pid_t pid;
@@ -11,18 +12,19 @@ int function_search(char **argv)
 		return (1);
 	directory = malloc(strlen(temp) + 1 * sizeof(char));
 	strcpy(directory, temp);
-	directory = strtok(directory, ":");
+	token = strtok(directory, ":");
 
-	while (directory != NULL)
+	while (token != NULL)
 	{
-		sprintf(path,"%s/%s", directory, argv[0]);
+		sprintf(path,"%s/%s", token, argv[0]);
 		if (access(path, X_OK) == 0)
 		{
 			found = 1;
 			break;
 		}
-		directory = strtok(NULL, ":");
+		token = strtok(NULL, ":");
 	}
+	free(directory);
 	if (found == 1)
 		pid = fork();
 	if (pid == 0)

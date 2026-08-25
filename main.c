@@ -61,6 +61,7 @@ int main(int ac, char **av)
 		{
 			free(argv);
 			free(temp);
+			free(user_input);
 			break;
 		}
 		i = 0;
@@ -74,6 +75,7 @@ int main(int ac, char **av)
 
 		free(argv);
 		free(temp);
+		free(user_input);
 		user_input = NULL;
 		i = 0;
 	}
