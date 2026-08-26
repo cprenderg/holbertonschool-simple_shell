@@ -7,17 +7,19 @@
 int get_argc(char *user_input)
 {
 	int argc = 0;
-	char *temp;
-	char *token;
+	char *temp, *token;
 
-	temp = strdup(user_input);
-	token = strtok(temp, " ");
-	while (token != NULL)
+	if (user_input != NULL)
 	{
-		argc++;
-		token = strtok(NULL, " ");
+		temp = strdup(user_input);
+		token = strtok(temp, " ");
+		while (token != NULL)
+		{
+			argc++;
+			token = strtok(NULL, " ");
+		}
+		free(temp);
 	}
-	free(temp);
 	return (argc);
 }
 

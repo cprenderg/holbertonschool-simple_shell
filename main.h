@@ -6,6 +6,8 @@
 #include <unistd.h>
 #include <sys/wait.h>
 #include <signal.h>
+#include <errno.h>
+#include <fcntl.h>
 /*
 #include <readline/readline.h>
 #include <readline/history.h>
@@ -34,6 +36,7 @@ char **get_argv(int argc, char *user_input);
 void no_sigint(int);
 historylist_t *history_func(char *user_input, historylist_t *head);
 void print_history(historylist_t *head);
+int path_execution(char *path);
 
 
 #endif

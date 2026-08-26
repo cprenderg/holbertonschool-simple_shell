@@ -15,40 +15,31 @@ void no_sigint(int needstobehere)
 }
 int main(void)
 {
-	char *user_input, **argv;
+	char *user_input, **argv, directory_path[1024];
 	int i, argc, command, user_input_len, command_table_size, interactive;
 	historylist_t *history_head;
 
-	char directory_path[1024];
-
+	history_head = NULL;
+	printbanner();
 	signal(SIGINT, no_sigint);
-	printbanner();	
 	command_table_size = sizeof(command_table) / sizeof(command_table[0]);
 	interactive = isatty(STDIN_FILENO);
-	history_head = NULL;
+
 	while (1)
 	{
 		if (interactive)
 		{
-			 /* printing prompt */
 			getcwd(directory_path, sizeof(directory_path));
-			printf("%s$ ", directory_path);
+			printf("%s$ ", directory_path); /* printing prompt */
 		}
 		user_input = getline_reader();
-		history_head = history_func(user_input, history_head);
 
-		if (user_input != NULL)
-		{
-			user_input_len = strlen(user_input);
-			user_input[user_input_len - 1] = '\0';
-		}
 		argc = get_argc(user_input);/* Getting argc */
 		if (argc == 0) /* no user input so start loop again */
 			continue;
-
 		argv = get_argv(argc, user_input);/* Creating argv */
-		i = 0;
-		command = 0;
+		history_head = history_func(user_input, history_head);
+		i = command = 0;
 		if (strcmp(argv[0], "history") == 0)
 		{
 			print_history(history_head);

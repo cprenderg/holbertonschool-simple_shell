@@ -1,10 +1,8 @@
 #include "main.h"
 int function_search(char **argv)
 {
-	char *directory;
-	char *temp;
-	char *token;
-	char path[1024];
+	char *directory, *temp, *token, path[1024];
+	extern char **environ;
 	int found = 0;
 	pid_t pid = -1;
 	
@@ -30,7 +28,7 @@ int function_search(char **argv)
 	if (pid == 0)
 	{
 		signal(SIGINT, SIG_DFL);
-		execv(path, argv);
+		execve(path, argv, environ);
 		_exit(1);
 	}
 	else if (pid == -1)
