@@ -16,7 +16,7 @@ void no_sigint(int needstobehere)
 int main(void)
 {
 	char *user_input, **argv, directory_path[1024];
-	int i, argc, command, user_input_len, command_table_size, interactive;
+	int i, argc, command, command_table_size, interactive;
 	historylist_t *history_head;
 
 	history_head = NULL;
@@ -50,12 +50,7 @@ int main(void)
 					free(argv);/* it is fine to free it this way*/
 					/*but we need to free history as well
 					should probably free everything in a separate function*/
-					free(history_head->next->next->user_input);
-					free(history_head->next->next);
-					free(history_head->next->user_input);
-					free(history_head->next);
-					free(history_head->user_input);
-					free(history_head);
+					free_history(history_head);
 					/*this has 0 leaks with 2 commands + exit command*/
 					exit (0); 
 				}
