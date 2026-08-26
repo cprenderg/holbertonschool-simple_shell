@@ -27,24 +27,19 @@ int main(void)
 
 	while (1)
 	{
+		i = command = 0;
 		if (interactive)
 		{
 			getcwd(directory_path, sizeof(directory_path));
 			printf("%s$ ", directory_path); /* printing prompt */
 		}
-		user_input = getline_reader();
-
-		argc = get_argc(user_input);/* Getting argc */
-		if (argc == 0) /* no user input so start loop again */
+		if ((user_input = getline_reader(history_head)) == NULL)
 			continue;
-		argv = get_argv(argc, user_input);/* Creating argv */
 		history_head = history_func(user_input, history_head);
-		i = command = 0;
-		if (strcmp(argv[0], "history") == 0)
-		{
-			print_history(history_head);
-			command = 1;
-		}
+		
+		argc = get_argc(user_input);/* Getting argc */
+		argv = get_argv(argc, user_input);/* Creating argv */
+
 		while (i < command_table_size)
 		{
 			if (strcmp(argv[0], command_table[i].command) == 0)
@@ -52,8 +47,17 @@ int main(void)
 				if (strcmp(argv[0], "exit") == 0)
 				{
 					free(user_input);
-					free(argv);
-					exit (0); /* felix please help i dont know how to free because argv is attached to user_input */
+					free(argv);/* it is fine to free it this way*/
+					/*but we need to free history as well
+					should probably free everything in a separate function*/
+					free(history_head->next->next->user_input);
+					free(history_head->next->next);
+					free(history_head->next->user_input);
+					free(history_head->next);
+					free(history_head->user_input);
+					free(history_head);
+					/*this has 0 leaks with 2 commands + exit command*/
+					exit (0); 
 				}
 				command_table[i].function(argc, argv);
 				command = 1;
@@ -61,7 +65,8 @@ int main(void)
 			}
 			i++;
 		}
-		if (command == 0)
+			/*temporary fixes*/
+		if (command == 0 && user_input[0] != '/' && strcmp(user_input, "history") != 0)
 		{
 			if ((function_search(argv)) == 1)
 				printf("Command execution failed\n");

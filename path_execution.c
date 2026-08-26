@@ -33,5 +33,6 @@ int path_execution(char *path)
 		int status;
 		waitpid(pid, &status, 0);
 	}
+	free (argv);
 	return (0);
 }

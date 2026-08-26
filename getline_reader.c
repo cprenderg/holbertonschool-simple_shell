@@ -4,7 +4,7 @@
 *getline_reader - reads the standard input
 *Return: pointer to string 
 */
-char *getline_reader(void)
+char *getline_reader(historylist_t *history_head)
 {
 	char *buffer;
 	size_t buffersize, buffer_len;
@@ -22,13 +22,20 @@ char *getline_reader(void)
 		buffer = NULL;
 		exit(2);
 	}
-	printf("it gets here1\n");
+	if (buffer[0] == '\n')
+		return (NULL);
+
 	buffer_len = strlen(buffer);
 	buffer[buffer_len - 1] = '\0';
+
 	if (buffer[0] == '/')
-	{
 		path_execution(buffer);
-		return (NULL);
+
+	if (strcmp(buffer, "history") == 0)
+	{
+		print_history(history_head);
+		printf("history\n");
 	}
+
 	return(buffer);
 }
