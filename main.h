@@ -26,7 +26,7 @@ typedef struct historylist_s{
 
 int cd_func(int argc, char **argv);
 void printbanner(void);
-char *getline_reader(historylist_t *history_head);
+char *getline_reader();
 int exit_func(int argc, char **argv);
 void quick_sort(char **array, size_t size);
 int function_search(char **argv);

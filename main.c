@@ -60,6 +60,9 @@ int main(void)
 			}
 			i++;
 		}
+		if (command == 0 && (strcmp(argv[0], "history") == 0))
+			print_history(history_head);
+
 			/*temporary fixes*/
 		if (command == 0 && user_input[0] != '/' && strcmp(user_input, "history") != 0)
 		{
