@@ -25,8 +25,6 @@ int main(void)
 	command_table_size = sizeof(command_table) / sizeof(command_table[0]);
 	interactive = isatty(STDIN_FILENO);
 
-	
-
 	while (1)
 	{
 		i = command = want_exit = 0;
@@ -35,6 +33,7 @@ int main(void)
 			getcwd(directory_path, sizeof(directory_path));
 			printf("%s$ ", directory_path); /* printing prompt */
 		}
+
 		if ((user_input = getline_reader()) == NULL)
 			continue;
 		history_head = history_func(user_input, history_head);

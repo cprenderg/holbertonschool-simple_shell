@@ -39,6 +39,6 @@ void print_history(historylist_t *head);
 int path_execution(char *path);
 void free_history(historylist_t *head);
 char *_getenv(const char *name);
-
+char *_getenv2(const char *name);
 
 #endif
