@@ -9,7 +9,7 @@ char *_getenv(const char *name)
 {
 	extern char **environ;
 	int i;
-	char *token, *value, *temp;
+	char *token, *temp;
 
 	i = 0;
 	while (environ[i] != NULL)
@@ -24,9 +24,7 @@ char *_getenv(const char *name)
 				free(temp);
 				return (NULL);
 			}
-			value = strdup(token);
-			free(temp);
-			return (value);
+			return (token);
 		}
 		free(temp);
 		i++;

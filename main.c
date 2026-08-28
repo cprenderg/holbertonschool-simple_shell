@@ -24,14 +24,17 @@ int main(void)
 	signal(SIGINT, no_sigint);
 	command_table_size = sizeof(command_table) / sizeof(command_table[0]);
 	interactive = isatty(STDIN_FILENO);
-	getcwd(directory_path, sizeof(directory_path));
+
+	
 
 	while (1)
 	{
 		i = command = want_exit = 0;
 		if (interactive)
+		{
+			getcwd(directory_path, sizeof(directory_path));
 			printf("%s$ ", directory_path); /* printing prompt */
-
+		}
 		if ((user_input = getline_reader()) == NULL)
 			continue;
 		history_head = history_func(user_input, history_head);
