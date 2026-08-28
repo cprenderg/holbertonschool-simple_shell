@@ -24,19 +24,18 @@ int main(void)
 	signal(SIGINT, no_sigint);
 	command_table_size = sizeof(command_table) / sizeof(command_table[0]);
 	interactive = isatty(STDIN_FILENO);
+	getcwd(directory_path, sizeof(directory_path));
 
 	while (1)
 	{
 		i = command = want_exit = 0;
 		if (interactive)
-		{
-			getcwd(directory_path, sizeof(directory_path));
 			printf("%s$ ", directory_path); /* printing prompt */
-		}
-		if ((user_input = getline_reader(history_head)) == NULL)
+
+		if ((user_input = getline_reader()) == NULL)
 			continue;
 		history_head = history_func(user_input, history_head);
-		
+
 		argc = get_argc(user_input);/* Getting argc */
 		argv = get_argv(argc, user_input);/* Creating argv */
 
@@ -45,9 +44,7 @@ int main(void)
 			if (strcmp(argv[0], command_table[i].command) == 0)
 			{
 				if (strcmp(argv[0], "exit") == 0)
-				{
 					want_exit = 1;
-				}
 				else
 					command_table[i].function(argc, argv);
 				command = 1;
@@ -57,19 +54,16 @@ int main(void)
 		}
 		if (command == 0 && (strcmp(argv[0], "history") == 0))
 			print_history(history_head);
-
 			/*temporary fixes*/
 		if (command == 0 && user_input[0] != '/' && strcmp(user_input, "history") != 0)
-		{
 			if ((function_search(argv)) == 1)
 				printf("Command execution failed\n");
-		}
+
 		free(argv);
 		free(user_input);
-		if (!interactive || want_exit)
+		if (want_exit)
 		{
 			free_history(history_head);
-			exit (0);
 		}
 	}
 	return (0);

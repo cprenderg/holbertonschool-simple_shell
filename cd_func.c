@@ -9,15 +9,29 @@
  */
 int cd_func(int argc, char **argv)
 {
-    if (argc > 2)
+	static char previous_dir[1024];
+	
+	printf("hello\n");
+	if (argc > 2)
     {
         printf("cd: too many arguments\n");
+		return (1);
     }
-    else if (argc < 2)
+	if (*argv[1] != '-')
+		getcwd(previous_dir, sizeof(previous_dir));
+	if (*argv[1] == '-')
+	{
+		char temp[1024];
+
+		getcwd(temp, sizeof(temp));
+		chdir(previous_dir);
+		strcpy(previous_dir, temp);
+	}
+	else if (argc < 2)
     {
-        printf("cd: we don't have this capabilty yet\n");
+		chdir(_getenv( "HOME"));
     }
-    else
+	else
     {
         if (chdir(argv[1]) == -1)
         {

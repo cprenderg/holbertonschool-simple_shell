@@ -6,7 +6,7 @@ int function_search(char **argv)
 	int found = 0;
 	pid_t pid = -1;
 	
-	if ((temp = getenv("PATH")) == NULL)
+	if ((temp = _getenv("PATH")) == NULL)
 		return (1);
 	directory = malloc(strlen(temp) + 1 * sizeof(char));
 	strcpy(directory, temp);
@@ -29,14 +29,19 @@ int function_search(char **argv)
 	{
 		signal(SIGINT, SIG_DFL);
 		execve(path, argv, environ);
+		free(temp);
 		_exit(1);
 	}
 	else if (pid == -1)
+	{
+		free(temp);
 		return (1);
+	}
 	else
 	{
 		int status;
 		waitpid(pid, &status, 0);
 	}
+	free(temp);
 	return (0);
 }

@@ -17,4 +17,5 @@ void free_history(historylist_t *head)
 	}
 	free(head->user_input);
 	free(head);
+	exit(0);
 }
