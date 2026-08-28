@@ -12,16 +12,13 @@ char *_getenv2(const char *name)
 
 	i = 0;
 	
-    printf("getting len\n");
     len = strlen(name);
-    printf("len = %d\n", len);
 
     while (environ[i] != NULL)
 	{
 		if (strncmp(name, environ[i], len) == 0 && environ[i][len] == '=')
         {
-			printf("returning: %s\n", environ[i] + len);
-            return (environ[i] + len);
+            return (environ[i] + len + 1);
         }
         i++;
 	}
