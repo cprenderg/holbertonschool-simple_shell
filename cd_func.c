@@ -13,6 +13,10 @@ int cd_func(int argc, char **argv)
     {
         printf("cd: too many arguments\n");
     }
+    else if (argc < 2)
+    {
+        printf("cd: we don't have this capabilty yet\n");
+    }
     else
     {
         if (chdir(argv[1]) == -1)

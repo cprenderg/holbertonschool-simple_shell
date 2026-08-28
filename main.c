@@ -16,7 +16,7 @@ void no_sigint(int needstobehere)
 int main(void)
 {
 	char *user_input, **argv, directory_path[1024];
-	int i, argc, command, command_table_size, interactive;
+	int i, argc, command, command_table_size, interactive, want_exit;
 	historylist_t *history_head;
 
 	history_head = NULL;
@@ -27,7 +27,7 @@ int main(void)
 
 	while (1)
 	{
-		i = command = 0;
+		i = command = want_exit = 0;
 		if (interactive)
 		{
 			getcwd(directory_path, sizeof(directory_path));
@@ -40,21 +40,16 @@ int main(void)
 		argc = get_argc(user_input);/* Getting argc */
 		argv = get_argv(argc, user_input);/* Creating argv */
 
-		while (i < command_table_size)
+		while (i < command_table_size) /* this is so unnecessary, we have 1 command only :')*/
 		{
 			if (strcmp(argv[0], command_table[i].command) == 0)
 			{
 				if (strcmp(argv[0], "exit") == 0)
 				{
-					free(user_input);
-					free(argv);/* it is fine to free it this way*/
-					/*but we need to free history as well
-					should probably free everything in a separate function*/
-					free_history(history_head);
-					/*this has 0 leaks with 2 commands + exit command*/
-					exit (0); 
+					want_exit = 1;
 				}
-				command_table[i].function(argc, argv);
+				else
+					command_table[i].function(argc, argv);
 				command = 1;
 				break;
 			}
@@ -71,8 +66,9 @@ int main(void)
 		}
 		free(argv);
 		free(user_input);
-		if (!interactive)
+		if (!interactive || want_exit)
 		{
+			free_history(history_head);
 			exit (0);
 		}
 	}
