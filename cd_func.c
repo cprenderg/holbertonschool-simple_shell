@@ -10,7 +10,6 @@
 int cd_func(int argc, char **argv)
 {
 	static char previous_dir[1024];
-	char *env;
 	
 	if (argc > 2)
     {
@@ -23,15 +22,7 @@ int cd_func(int argc, char **argv)
 		return (0);
     }
 	if (*argv[1] != '-')
-	{
 		getcwd(previous_dir, sizeof(previous_dir));
-		env = _getenv( "HOME");
-		chdir(env);
-		return(0);
-    }
-	if (argc > 1 && *argv[1] != '-')
-		getcwd(previous_dir, sizeof(previous_dir));
-
 	if (*argv[1] == '-')
 	{
 		char temp[1024];
