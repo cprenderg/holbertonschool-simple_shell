@@ -12,10 +12,10 @@
 #include <readline/readline.h>
 #include <readline/history.h>
 */
-typedef struct command_s{
-    char *command;
-    int (*function)(int argc, char **argv);
-} command_t;
+// typedef struct command_s{
+//     char *command;
+//     int (*function)(int argc, char **argv);
+// } command_t;
 
 typedef struct historylist_s{
     int id;
@@ -41,6 +41,6 @@ void free_history(historylist_t *head);
 char *_getenv(const char *name);
 char *_getenv2(const char *name);
 int handle_user_input(char *user_input, historylist_t *history_head);
-int handle_pipe(char *user_input);
+int handle_condition(char *user_input, char spec);
 
 #endif

@@ -23,7 +23,7 @@ int handle_user_input(char *user_input, historylist_t *history_head)
     else
     {
         if ((function_search(argv)) == 1)
-            printf("Command execution failed\n");
+            printf("'%s': command not found\n", argv[0]);
     }
     free(argv);
     return (0);

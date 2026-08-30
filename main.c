@@ -1,10 +1,11 @@
 #include "main.h"
 
 
-static const command_t command_table[] = {
-		{"exit", exit_func},
-		{"cd", cd_func}
-	};
+// static const command_t command_table[] = {
+// 		{"exit", exit_func},
+// 		{"cd", cd_func}
+// 	};
+
 void no_sigint(int needstobehere)
 {
 	char directory_path[1024];
@@ -18,11 +19,11 @@ int main(void)
 	char *user_input, **argv, directory_path[1024];
 	int i, argc, command, command_table_size, interactive, want_exit;
 	historylist_t *history_head;
+	char *specifier_table[] = {"||", "&&", NULL};
 
 	history_head = NULL;
 	printbanner();
 	signal(SIGINT, no_sigint);
-	command_table_size = sizeof(command_table) / sizeof(command_table[0]);
 	interactive = isatty(STDIN_FILENO);
 
 	while (1)
@@ -38,10 +39,17 @@ int main(void)
 			continue;
 		history_head = history_func(user_input, history_head);
 
-		if (strchr(user_input, '|')) 
-			handle_pipe(user_input); /* this does nothing at the moment */
-
-		want_exit = handle_user_input(user_input, history_head);
+		while (specifier_table[i] != NULL)
+		{
+			if (strstr(user_input, specifier_table[i]))
+			{
+				want_exit = handle_condition(user_input, *specifier_table[i]);
+				command = 1;
+			}
+			i++;
+		}
+		if (!command)
+			want_exit = handle_user_input(user_input, history_head);
 
 		free(user_input);
 		if (want_exit)
