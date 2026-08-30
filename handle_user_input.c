@@ -7,13 +7,13 @@
  *
  * Return: return 0 on success, 1 if want_exit (for now)
  */
-int handle_user_input(int argc, char **argv, int start, historylist_t *history_head)
+int handle_user_input(int argc, char **argv, historylist_t *history_head)
 {
-        if (strcmp(argv[start], "exit") == 0)
+        if (strcmp(argv[0], "exit") == 0)
             return (1);
-        else if (strcmp(argv[start], "cd") == 0)
+        else if (strcmp(argv[0], "cd") == 0)
             cd_func(argc, argv);
-        else if (strcmp(argv[start], "history") == 0)
+        else if (strcmp(argv[0], "history") == 0)
             print_history(history_head);
         else
         {

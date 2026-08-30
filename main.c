@@ -41,31 +41,7 @@ int main(void)
 		argc = get_argc(user_input);/* Getting argc */
 		argv = get_argv(argc, user_input);/* Creating argv */
 
-		int argc2, args_used, j = 0;
-		// while (j < argc)
-		// {
-		// 	while (i < argc)
-		// 	{
-		// 		// if (strcmp(argv[i], "|") == 0 && argv[i + 1] != NULL)
-		// 		// {
-		// 		// 	argc2 = argc - i;
-		// 		// 	args_used += argc2;
-		// 		// }
-		// 		// else
-		// 		// {
-		// 		// 	argc2 = argc;
-		// 		// }
-		// 		// i++;
-		// 		// argc2 = argc; //for testing remove after
-		// 		// want_exit = handle_user_input(argc2, argv, args_used, history_head);
-		// 		// i++;
-
-		// 	}
-		// }
-
-		argc2 = argc; //for testing remove after
-		want_exit = handle_user_input(argc2, argv, args_used, history_head);
-
+		want_exit = handle_user_input(argc, argv, history_head);
 
 		free(argv);
 		free(user_input);

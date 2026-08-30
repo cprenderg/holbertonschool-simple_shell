@@ -40,6 +40,6 @@ int path_execution(char *path);
 void free_history(historylist_t *head);
 char *_getenv(const char *name);
 char *_getenv2(const char *name);
-int handle_user_input(int argc, char **argv, int start, historylist_t *history_head);
+int handle_user_input(int argc, char **argv, historylist_t *history_head);
 
 #endif
