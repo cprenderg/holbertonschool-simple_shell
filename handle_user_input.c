@@ -7,19 +7,25 @@
  *
  * Return: return 0 on success, 1 if want_exit (for now)
  */
-int handle_user_input(int argc, char **argv, historylist_t *history_head)
+int handle_user_input(char *user_input, historylist_t *history_head)
 {
-        if (strcmp(argv[0], "exit") == 0)
-            return (1);
-        else if (strcmp(argv[0], "cd") == 0)
-            cd_func(argc, argv);
-        else if (strcmp(argv[0], "history") == 0)
-            print_history(history_head);
-        else
-        {
-            if ((function_search(argv)) == 1)
-                printf("Command execution failed\n");
-        }
+    int argc;
+    char **argv;
+
+    argc = get_argc(user_input);/* Getting argc */
+	argv = get_argv(argc, user_input);/* Creating argv */
+    if (strcmp(argv[0], "exit") == 0)
+        return (1);
+    else if (strcmp(argv[0], "cd") == 0)
+        cd_func(argc, argv);
+    else if (strcmp(argv[0], "history") == 0)
+        print_history(history_head);
+    else
+    {
+        if ((function_search(argv)) == 1)
+            printf("Command execution failed\n");
+    }
+    free(argv);
     return (0);
 }
 

@@ -38,12 +38,11 @@ int main(void)
 			continue;
 		history_head = history_func(user_input, history_head);
 
-		argc = get_argc(user_input);/* Getting argc */
-		argv = get_argv(argc, user_input);/* Creating argv */
+		if (strchr(user_input, '|')) 
+			handle_pipe(user_input); /* this does nothing at the moment */
 
-		want_exit = handle_user_input(argc, argv, history_head);
+		want_exit = handle_user_input(user_input, history_head);
 
-		free(argv);
 		free(user_input);
 		if (want_exit)
 		{
