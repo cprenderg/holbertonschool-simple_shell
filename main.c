@@ -41,25 +41,31 @@ int main(void)
 		argc = get_argc(user_input);/* Getting argc */
 		argv = get_argv(argc, user_input);/* Creating argv */
 
-		while (i < command_table_size) /* this is so unnecessary, we have 1 command only :')*/
-		{
-			if (strcmp(argv[0], command_table[i].command) == 0)
-			{
-				if (strcmp(argv[0], "exit") == 0)
-					want_exit = 1;
-				else
-					command_table[i].function(argc, argv);
-				command = 1;
-				break;
-			}
-			i++;
-		}
-		if (command == 0 && (strcmp(argv[0], "history") == 0))
-			print_history(history_head);
-			/*temporary fixes*/
-		if (command == 0 && user_input[0] != '/' && strcmp(user_input, "history") != 0)
-			if ((function_search(argv)) == 1)
-				printf("Command execution failed\n");
+		int argc2, args_used, j = 0;
+		// while (j < argc)
+		// {
+		// 	while (i < argc)
+		// 	{
+		// 		// if (strcmp(argv[i], "|") == 0 && argv[i + 1] != NULL)
+		// 		// {
+		// 		// 	argc2 = argc - i;
+		// 		// 	args_used += argc2;
+		// 		// }
+		// 		// else
+		// 		// {
+		// 		// 	argc2 = argc;
+		// 		// }
+		// 		// i++;
+		// 		// argc2 = argc; //for testing remove after
+		// 		// want_exit = handle_user_input(argc2, argv, args_used, history_head);
+		// 		// i++;
+
+		// 	}
+		// }
+
+		argc2 = argc; //for testing remove after
+		want_exit = handle_user_input(argc2, argv, args_used, history_head);
+
 
 		free(argv);
 		free(user_input);
