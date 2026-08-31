@@ -1,5 +1,5 @@
 #include "main.h"
-int function_search(char **argv)
+int function_search(char **argv, int *last_status)
 {
 	char *directory, *temp, *token, path[1024];
 	extern char **environ;
@@ -39,6 +39,7 @@ int function_search(char **argv)
 	{
 		int status;
 		waitpid(pid, &status, 0);
+		*last_status = WEXITSTATUS(status);
 	}
 	return (0);
 }

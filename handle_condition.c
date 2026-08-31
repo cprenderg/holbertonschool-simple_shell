@@ -5,7 +5,7 @@
  *
  * Return: 0 on success, 1 if want_exit
  */
-int handle_condition(char *user_input, char spec)
+int handle_condition(char *user_input, char spec, int *last_status)
 {
 	int argc_left, argc_right;
 	char **argv_left, **argv_right;
@@ -25,17 +25,17 @@ int handle_condition(char *user_input, char spec)
 
 	if (spec == '&')
 	{
-		if (function_search(argv_left) == 1)
+		if (function_search(argv_left, last_status) == 1)
 			printf("'%s': command not found\n", argv_left[0]);
-		if (function_search(argv_right) == 1)
+		if (function_search(argv_right, last_status) == 1)
 			printf("'%s': command not found\n", argv_right[0]);
 	}
 	else if (spec == '|')
 	{
-		if (function_search(argv_left) == 1)
+		if (function_search(argv_left, last_status) == 1)
 		{
 			printf("'%s': command not found\n", argv_left[0]);
-			if ((function_search(argv_right)) == 1)
+			if ((function_search(argv_right, last_status)) == 1)
 				printf("'%s': command not found\n", argv_right[0]);
 		}
 	}
