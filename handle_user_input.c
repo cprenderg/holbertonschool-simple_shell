@@ -40,9 +40,10 @@ int handle_user_input(char *user_input, historylist_t *history_head)
     i = 0;
     while (i < argc)
     {
-        free(argv[i]);
+		free(argv[i]);
         i++;
     }
+
     free(argv);
     return (0);
 }
