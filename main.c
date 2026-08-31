@@ -22,9 +22,10 @@ int main(void)
 	char *specifier_table[] = {"||", "&&", NULL};
 
 	history_head = NULL;
-	printbanner();
 	signal(SIGINT, no_sigint);
 	interactive = isatty(STDIN_FILENO);
+	if (interactive)
+		printbanner();
 
 	while (1)
 	{
