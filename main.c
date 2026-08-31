@@ -52,7 +52,7 @@ int main(void)
 		if (!command)
 			want_exit = handle_user_input(user_input, history_head);
 
-		if (want_exit)
+		if (want_exit || !interactive)
 		{
 			free_history(history_head);
 			break;
