@@ -16,8 +16,8 @@ void no_sigint(int needstobehere)
 }
 int main(void)
 {
-	char *user_input, **argv, directory_path[1024];
-	int i, argc, command, command_table_size, interactive, want_exit;
+	char *user_input, directory_path[1024];
+	int i, command, interactive, want_exit;
 	historylist_t *history_head;
 	char *specifier_table[] = {"||", "&&", NULL};
 
