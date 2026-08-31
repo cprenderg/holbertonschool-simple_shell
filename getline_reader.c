@@ -6,9 +6,8 @@
 */
 char *getline_reader()
 {
-	char *buffer, **argv;
+	char *buffer;
 	size_t buffersize, buffer_len;
-	int argc;
 
 	buffer = NULL; /* setting to NULL means getline will allocate the size*/
 	if (getline(&buffer, &buffersize, stdin) == -1)
@@ -22,12 +21,6 @@ char *getline_reader()
 
 	buffer_len = strlen(buffer);
 	buffer[buffer_len - 1] = '\0';
-
-	argc = get_argc(buffer);
-	argv = get_argv(argc, buffer);
-
-	if (strchr(argv[0], '/') != NULL)
-		path_execution(argv[0]);
-
+	
 	return(buffer);
 }
