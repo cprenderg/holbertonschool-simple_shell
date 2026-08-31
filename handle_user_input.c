@@ -14,6 +14,11 @@ int handle_user_input(char *user_input, historylist_t *history_head)
 
     argc = get_argc(user_input);/* Getting argc */
 	argv = get_argv(argc, user_input);/* Creating argv */
+    if (argv[0] == NULL)
+    {
+        free(argv);
+        return (2); /*pseudo status we can decide later */
+    } 
 	if (strcmp(argv[0], "exit") == 0)
 	{
 		i = 0;

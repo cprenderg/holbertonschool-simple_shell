@@ -61,7 +61,7 @@ int main(void)
 		
 		free(user_input);
 
-		if (want_exit)
+		if (want_exit == 1)
 		{
 			break;
 		}
