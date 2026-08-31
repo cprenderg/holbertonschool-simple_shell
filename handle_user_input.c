@@ -39,10 +39,7 @@ int handle_user_input(char *user_input, historylist_t *history_head)
 	else
     {
         if ((function_search(argv)) == 1)
-        {
-            fprintf(stderr, "./hsh: 1: %s: not found\n", argv[0]);
-            error = 127;
-        }
+            fprintf(stderr, "./hsh: 1: %s: command not found\n", argv[0]);
     }
 
     i = 0;
