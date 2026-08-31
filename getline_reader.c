@@ -14,13 +14,14 @@ char *getline_reader()
 	{	
 		free(buffer);
 		buffer = NULL;
-		exit(0);
+		return NULL;
 	}
-	if (buffer[0] == '\n')
-		return (NULL);
 
 	buffer_len = strlen(buffer);
-	buffer[buffer_len - 1] = '\0';
+	if (buffer_len > 1)
+		buffer[buffer_len - 1] = '\0';
+	else
+		buffer[buffer_len] = '\0';
 	
 	return(buffer);
 }
