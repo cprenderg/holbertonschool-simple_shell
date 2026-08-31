@@ -17,7 +17,7 @@ void no_sigint(int needstobehere)
 int main(void)
 {
 	char *user_input, directory_path[1024];
-	int i, command, interactive, want_exit;
+	int i, command, interactive, want_exit, last_status = 0;
 	historylist_t *history_head;
 	char *specifier_table[] = {"||", "&&", NULL};
 
@@ -51,13 +51,13 @@ int main(void)
 		{
 			if (strstr(user_input, specifier_table[i]))
 			{
-				want_exit = handle_condition(user_input, *specifier_table[i]);
+				want_exit = handle_condition(user_input, *specifier_table[i], &last_status);
 				command = 1;
 			}
 			i++;
 		}
 		if (!command)
-			want_exit = handle_user_input(user_input, history_head);
+			want_exit = handle_user_input(user_input, history_head, &last_status);
 		
 		free(user_input);
 
@@ -65,5 +65,5 @@ int main(void)
 			break;
 	}
 	free_history(history_head);
-	return (want_exit);
+	return (last_status);
 }

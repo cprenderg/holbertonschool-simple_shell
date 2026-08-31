@@ -29,18 +29,18 @@ void printbanner(void);
 char *getline_reader();
 int exit_func(int argc, char **argv);
 void quick_sort(char **array, size_t size);
-int function_search(char **argv);
 char *readline_reader(void);
 int get_argc(char *user_input);
 char **get_argv(int argc, char *user_input);
 void no_sigint(int);
 historylist_t *history_func(char *user_input, historylist_t *head);
 void print_history(historylist_t *head);
-int path_execution(char **argv);
+int path_execution(char **argv, int *last_status);
+int function_search(char **argv, int *last_status);
 void free_history(historylist_t *head);
 char *_getenv(const char *name);
 char *_getenv2(const char *name);
-int handle_user_input(char *user_input, historylist_t *history_head);
-int handle_condition(char *user_input, char spec);
+int handle_user_input(char *user_input, historylist_t *history_head, int *last_status);
+int handle_condition(char *user_input, char spec, int *last_status);
 
 #endif

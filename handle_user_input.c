@@ -7,7 +7,7 @@
  *
  * Return: return 0 on success, 1 if want_exit (for now)
  */
-int handle_user_input(char *user_input, historylist_t *history_head)
+int handle_user_input(char *user_input, historylist_t *history_head, int *last_status)
 {
     int argc, i, error = 0;
     char **argv;
@@ -35,11 +35,14 @@ int handle_user_input(char *user_input, historylist_t *history_head)
 	else if (strcmp(argv[0], "history") == 0)
         print_history(history_head);
 	else if (strchr(argv[0], '/') != NULL)
-		error = path_execution(argv);
+		error = path_execution(argv, last_status);
 	else
     {
-        if ((function_search(argv)) == 1)
-            fprintf(stderr, "./hsh: 1: %s: command not found\n", argv[0]);
+        if ((function_search(argv, last_status)) == 1)
+		{
+            printf("'%s': command not found\n", argv[0]);
+			*last_status = 127;
+		}
     }
 
     i = 0;
@@ -52,4 +55,3 @@ int handle_user_input(char *user_input, historylist_t *history_head)
     free(argv);
     return (error);
 }
-
