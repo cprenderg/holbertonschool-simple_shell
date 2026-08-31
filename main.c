@@ -60,9 +60,8 @@ int main(void)
 			want_exit = handle_user_input(user_input, history_head, &last_status);
 		
 		free(user_input);
-		if (want_exit == 2)
-			continue;
-		else if (want_exit != 0)
+
+		if (want_exit == 1)
 			break;
 	}
 	free_history(history_head);
