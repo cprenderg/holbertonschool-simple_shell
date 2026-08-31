@@ -7,7 +7,7 @@ int function_search(char **argv, int *last_status)
 	pid_t pid = -1;
 	
 	if ((temp = _getenv2("PATH")) == NULL)
-		return (1);
+		temp = "/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin";
 	directory = malloc(strlen(temp) + 1 * sizeof(char));
 	strcpy(directory, temp);
 	token = strtok(directory, ":");
