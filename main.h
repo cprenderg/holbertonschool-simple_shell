@@ -12,10 +12,10 @@
 #include <readline/readline.h>
 #include <readline/history.h>
 */
-// typedef struct command_s{
-//     char *command;
-//     int (*function)(int argc, char **argv);
-// } command_t;
+/** typedef struct command_s{
+    char *command;
+ int (*function)(int argc, char **argv);
+} command_t; */
 
 typedef struct historylist_s{
     int id;

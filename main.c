@@ -1,10 +1,10 @@
 #include "main.h"
 
 
-// static const command_t command_table[] = {
-// 		{"exit", exit_func},
-// 		{"cd", cd_func}
-// 	};
+/** static const command_t command_table[] = {
+ 		{"exit", exit_func},
+ 		{"cd", cd_func}
+ 	};*/
 
 void no_sigint(int needstobehere)
 {
