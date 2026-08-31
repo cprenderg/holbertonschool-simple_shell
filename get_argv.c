@@ -16,7 +16,7 @@ char **get_argv(int argc, char *user_input)
 	token = strtok(user_input, " ");
 	while (token != NULL)
 	{
-		argv[i] = token;
+		argv[i] = strdup(token);
 		token = strtok(NULL, " ");
 		i++;
 	}
