@@ -9,13 +9,22 @@
  */
 int handle_user_input(char *user_input, historylist_t *history_head)
 {
-    int argc;
+    int argc, i;
     char **argv;
 
     argc = get_argc(user_input);/* Getting argc */
 	argv = get_argv(argc, user_input);/* Creating argv */
 	if (strcmp(argv[0], "exit") == 0)
+	{
+		i = 0;
+		while (i < argc)
+		{
+			free(argv[i]);
+			i++;
+		}
+		free(argv);
         return (1);
+	}
 	else if (strcmp(argv[0], "cd") == 0)
         cd_func(argc, argv);
 	else if (strcmp(argv[0], "history") == 0)
@@ -28,6 +37,12 @@ int handle_user_input(char *user_input, historylist_t *history_head)
             printf("'%s': command not found\n", argv[0]);
     }
 
+    i = 0;
+    while (i < argc)
+    {
+        free(argv[i]);
+        i++;
+    }
     free(argv);
     return (0);
 }

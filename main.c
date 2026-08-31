@@ -52,10 +52,10 @@ int main(void)
 		if (!command)
 			want_exit = handle_user_input(user_input, history_head);
 
-		free(user_input);
 		if (want_exit)
 		{
 			free_history(history_head);
+			break;
 		}
 	}
 	return (0);
