@@ -60,12 +60,11 @@ int main(void)
 			want_exit = handle_user_input(user_input, history_head);
 		
 		free(user_input);
-
-		if (want_exit == 1)
-		{
+		if (want_exit == 2)
+			continue;
+		else if (want_exit != 0)
 			break;
-		}
 	}
 	free_history(history_head);
-	return (0);
+	return (want_exit);
 }

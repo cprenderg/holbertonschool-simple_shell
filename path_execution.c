@@ -13,13 +13,13 @@ int path_execution(char **argv)
 		{
 			close(fd);
 			fprintf(stderr, "Shell V.01: %s: Is a directory\n", argv[0]);
-			exit(126);
+			return(126);
 		}
 		else
 		{
 			execve(argv[0], argv, environ);
 			fprintf(stderr, "Shell V.01: %s: %s\n", argv[0], strerror(errno));
-			exit(127);
+			return(127);
 		}
 	}
 	else if (pid == -1)

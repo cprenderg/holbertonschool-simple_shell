@@ -9,7 +9,7 @@
  */
 int handle_user_input(char *user_input, historylist_t *history_head)
 {
-    int argc, i;
+    int argc, i, error = 0;
     char **argv;
 
     argc = get_argc(user_input);/* Getting argc */
@@ -35,7 +35,7 @@ int handle_user_input(char *user_input, historylist_t *history_head)
 	else if (strcmp(argv[0], "history") == 0)
         print_history(history_head);
 	else if (strchr(argv[0], '/') != NULL)
-		path_execution(argv);
+		error = path_execution(argv);
 	else
     {
         if ((function_search(argv)) == 1)
@@ -50,6 +50,6 @@ int handle_user_input(char *user_input, historylist_t *history_head)
     }
 
     free(argv);
-    return (0);
+    return (error);
 }
 
