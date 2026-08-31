@@ -28,6 +28,7 @@ int path_execution(char **argv)
 	{
 		int status;
 		waitpid(pid, &status, 0);
+		return (status >> 8);
 	}
-	return (status >> 8);
+	return (0);
 }
