@@ -36,7 +36,7 @@ char **get_argv(int argc, char *user_input);
 void no_sigint(int);
 historylist_t *history_func(char *user_input, historylist_t *head);
 void print_history(historylist_t *head);
-int path_execution(char *path);
+int path_execution(char **argv);
 void free_history(historylist_t *head);
 char *_getenv(const char *name);
 char *_getenv2(const char *name);
