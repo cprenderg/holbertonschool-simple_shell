@@ -17,7 +17,7 @@ int handle_user_input(char *user_input, historylist_t *history_head)
 	if (strcmp(argv[0], "exit") == 0)
 	{
 		i = 0;
-		while (i < argc - 1)
+		while (i < argc)
 		{
 			free(argv[i]);
 			i++;
@@ -38,7 +38,7 @@ int handle_user_input(char *user_input, historylist_t *history_head)
     }
 
     i = 0;
-    while (i < argc - 1)
+    while (i < argc)
     {
 		free(argv[i]);
         i++;
