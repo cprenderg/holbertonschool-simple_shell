@@ -40,7 +40,7 @@ int handle_user_input(char *user_input, historylist_t *history_head, int *last_s
     {
         if ((function_search(argv, last_status)) == 1)
 		{
-            printf("'%s': command not found\n", argv[0]);
+            fprintf(stderr, "./hsh: 1: %s: not found\n", argv[0]);
 			*last_status = 127;
 		}
     }
