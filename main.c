@@ -35,9 +35,16 @@ int main(void)
 			getcwd(directory_path, sizeof(directory_path));
 			printf("%s$ ", directory_path); /* printing prompt */
 		}
-
-		if ((user_input = getline_reader()) == NULL)
+		user_input = getline_reader();
+		
+		if (user_input == NULL)
+			break;
+		if (*user_input == '\n')
+		{
+			free(user_input);
 			continue;
+		}
+
 		history_head = history_func(user_input, history_head);
 
 		while (specifier_table[i] != NULL)
@@ -51,13 +58,14 @@ int main(void)
 		}
 		if (!command)
 			want_exit = handle_user_input(user_input, history_head);
+		
 		free(user_input);
 
 		if (want_exit)
 		{
-			free_history(history_head);
 			break;
 		}
 	}
+	free_history(history_head);
 	return (0);
 }
