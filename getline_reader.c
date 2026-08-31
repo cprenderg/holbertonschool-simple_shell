@@ -21,6 +21,6 @@ char *getline_reader()
 
 	buffer_len = strlen(buffer);
 	buffer[buffer_len - 1] = '\0';
-	
+
 	return(buffer);
 }
