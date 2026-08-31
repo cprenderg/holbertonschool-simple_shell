@@ -53,7 +53,7 @@ int main(void)
 			want_exit = handle_user_input(user_input, history_head);
 		free(user_input);
 
-		if (want_exit || !interactive)
+		if (want_exit)
 		{
 			free_history(history_head);
 			break;

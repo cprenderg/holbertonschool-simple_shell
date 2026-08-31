@@ -14,7 +14,7 @@ char *getline_reader()
 	{	
 		free(buffer);
 		buffer = NULL;
-		exit(0);
+		return ("exit");
 	}
 	if (buffer[0] == '\n')
 		return (NULL);
