@@ -18,10 +18,10 @@ char *getline_reader()
 	}
 
 	buffer_len = strlen(buffer);
+
 	if (buffer_len > 1)
 		buffer[buffer_len - 1] = '\0';
 	else
 		buffer[buffer_len] = '\0';
-	
 	return(buffer);
 }
