@@ -6,7 +6,7 @@
  */
 int _atoi(char *argv)
 {
-	int i = 0, sum = 0, neg = 0;
+	int i = 0, sum = 0;
 
 	while (argv[i])
 	{
