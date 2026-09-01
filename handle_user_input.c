@@ -20,7 +20,7 @@ int _atoi(char *argv)
 			sum = sum * 10 + (argv[i] - '0');
 			i++;
 		}
-		else 
+		else
 		{
 			return (0);
 		}
