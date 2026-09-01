@@ -26,14 +26,18 @@ int cd_func(int argc, char **argv)
 	}
 	if (*argv[1] != '-')
 		getcwd(previous_dir, sizeof(previous_dir));
-	if (*argv[1] == '-')
+	if (strcmp(argv[1], "-") == 0)
 	{
 		char temp[1024];
 
 		getcwd(temp, sizeof(temp));
 		if (previous_dir[0] == '\0')
+		{
+			printf("%s\n", temp);
 			return (0);
+		}
 		chdir(previous_dir);
+		printf("%s\n", previous_dir);
 		strcpy(previous_dir, temp);
 	}
 	else
