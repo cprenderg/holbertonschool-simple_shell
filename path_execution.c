@@ -7,7 +7,7 @@
  */
 int path_execution(char **argv, int *last_status)
 {
-	int fd;
+	int fd, status;
 	pid_t pid;
 
 	pid = fork();
@@ -28,9 +28,10 @@ int path_execution(char **argv, int *last_status)
 		}
 	}
 	else if (pid == -1)
-		return (1);
-
-	int status;
+	{
+		*last_status = 254;
+		return (0);
+	}
 
 	waitpid(pid, &status, 0);
 	*last_status = WEXITSTATUS(status);

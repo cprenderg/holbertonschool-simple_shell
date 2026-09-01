@@ -16,7 +16,7 @@ int function_search(char **argv, int *last_status)
 	temp = _getenv("PATH");
 	if (temp == NULL)
 		temp = "/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin";
-	directory = stdup(temp);
+	directory = strdup(temp);
 	token = strtok(directory, ":");
 	while (token != NULL)
 	{

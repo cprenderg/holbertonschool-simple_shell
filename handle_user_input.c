@@ -1,24 +1,17 @@
 #include "main.h"
 /**
- * handle_user_input - attempts to execute user command
- * @user_input: the user input string
+ * check_command - attempts to execute user command
+ * @argc: amount of user input
+ * @argv: array of pointers to user input
  * @status: variable to store error codes
  * @history_h: head of history list
  *
- * Return: return 0 on success, 1 if want_exit (for now)
+ * Return: Error status
  */
-int handle_user_input(char *user_input, historylist_t *history_h, int *status)
+int check_command(int argc, char **argv, historylist_t *history_h, int *status)
 {
-	int argc, i = 0, error = 0;
-	char **argv;
+	int i, error = 0;
 
-	argc = get_argc(user_input);/* Getting argc */
-	argv = get_argv(argc, user_input);/* Creating argv */
-	if (argv[0] == NULL)
-	{
-		free(argv);
-		return (2); /*pseudo status we can decide later */
-	}
 	if (strcmp(argv[0], "exit") == 0)
 	{
 		while (i < argc)
@@ -43,27 +36,35 @@ int handle_user_input(char *user_input, historylist_t *history_h, int *status)
 			*status = 127;
 		}
 	}
-	i = 0;
-	while (i < argc)
-	{
-		free(argv[i]);
-		i++;
-	}
-	free(argv);
 	return (error);
 }
-
 /**
-*	char *specifier_table[] = {"||", "&&", NULL};
-*
-*while (specifier_table[i] != NULL)
-*		{
-*			if (strstr(user_input, specifier_table[i]))
-*			{
-*				want_exit = handle_condition(user_input, *specifier_table[i], &status);
-*				command = 1;
-*			}
-*			i++;
-*		}
-*
-*/
+ * handle_input - attempts to execute user command
+ * @user_input: the user input string
+ * @status: variable to store error codes
+ * @history_h: head of history list
+ *
+ * Return: return 0 on success, 1 if want_exit (for now)
+ */
+int handle_input(char *user_input, historylist_t *history_h, int *status)
+{
+	int argc, i = 0, error = 0;
+	char **argv;
+
+	argc = get_argc(user_input);/* Getting argc */
+	argv = get_argv(argc, user_input);/* Creating argv */
+
+	error = check_command(argc, argv, history_h, status);
+
+	i = 0;
+	if (error != 1)
+	{
+		while (i < argc)
+		{
+			free(argv[i]);
+			i++;
+		}
+		free(argv);
+	}
+	return (error);
+}

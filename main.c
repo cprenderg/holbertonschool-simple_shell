@@ -19,7 +19,7 @@ void no_sigint(int needstobehere)
 int main(void)
 {
 	char *user_input, directory_path[1024];
-	int i, command, interactive, want_exit, last_status = 0;
+	int command, interactive, want_exit, last_status = 0;
 	historylist_t *history_head;
 
 	history_head = NULL;
@@ -30,7 +30,7 @@ int main(void)
 
 	while (1)
 	{
-		i = command = want_exit = 0;
+		command = want_exit = 0;
 		if (interactive)
 		{
 			getcwd(directory_path, sizeof(directory_path));
