@@ -17,7 +17,7 @@ int function_search(char **argv, int *last_status)
 	if (temp == NULL)
 		temp = "/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin";
 	directory = strdup(temp);
-	token = strtok(directory, ":");
+	token = _strtok(directory, ":");
 	while (token != NULL)
 	{
 		sprintf(path, "%s/%s", token, argv[0]);
@@ -26,7 +26,7 @@ int function_search(char **argv, int *last_status)
 			found = 1;
 			break;
 		}
-		token = strtok(NULL, ":");
+		token = _strtok(NULL, ":");
 	}
 	free(directory);
 	if (found == 1)
