@@ -1,6 +1,6 @@
 #include "main.h"
 /**
-*printbanner - prints a banner a start of shell
+*printbanner - prints a banner at the launch of the shell
 */
 void printbanner(void)
 {
