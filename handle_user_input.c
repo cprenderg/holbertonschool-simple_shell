@@ -14,11 +14,15 @@ int check_command(int argc, char **argv, historylist_t *history_h, int *status)
 
 	if (strcmp(argv[0], "exit") == 0)
 	{
+		if (argv[1] != NULL)
+			*status = strtol(argv[1], NULL, 0);
+
 		while (i < argc)
 		{
 			free(argv[i]);
 			i++;
 		}
+
 		free(argv);
 		return (1);
 	}
