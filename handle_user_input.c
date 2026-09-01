@@ -18,7 +18,7 @@ int _atoi(char *argv)
 		else
 		{
 			fprintf(stderr, "./hsh: 1: exit: Illegal number: %s\n", argv);
-			return (0);
+			return (2);
 		}
 	}
 	return (sum);
