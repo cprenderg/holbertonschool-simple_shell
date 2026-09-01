@@ -1,5 +1,4 @@
 #include "main.h"
-#include <stdio.h>
 /**
  * cd_func - changes current working directory
  * @argc: number of arguments
@@ -46,7 +45,7 @@ int cd_func(int argc, char **argv)
 		{
 			if (errno == EACCES)
 			{
-				fprintf(stderr, "./hsh: 1: cd: can't cd to /root\n");
+				fprintf(stderr, COLOR_RED "./hsh: 1: cd: can't cd to /root\n"RESET);
 			}
 			else
 				perror("cd");
