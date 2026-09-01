@@ -44,9 +44,9 @@ int cd_func(int argc, char **argv)
 	{
 		if (chdir(argv[1]) == -1)
 		{
-			if (errno == EACCES)
+			if (errno == EACCES || errno == ENOENT)
 			{
-				fprintf(stderr, "./hsh: 1: cd: can't cd to /root\n");
+				fprintf(stderr, "./hsh: 1: cd: can't cd to %s\n", argv[1]);
 			}
 			else
 				perror("cd");
