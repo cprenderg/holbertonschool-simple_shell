@@ -6,13 +6,8 @@
  */
 int _atoi(char *argv)
 {
-	int i = 0, sum = 0, neg = 0;
+	int i = 0, sum = 0;
 
-	if (argv[i] == '-')
-	{
-		neg = 1;
-		i++;
-	}
 	while (argv[i])
 	{
 		if (argv[i] >= '0' && argv[i] <= '9')
@@ -22,11 +17,10 @@ int _atoi(char *argv)
 		}
 		else
 		{
-			return (0);
+			fprintf(stderr, "./hsh: 1: exit: Illegal number: %s\n", argv);
+			return (2);
 		}
 	}
-	if (neg == 1)
-		sum = sum * -1;
 	return (sum);
 }
 
