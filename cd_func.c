@@ -43,10 +43,8 @@ int cd_func(int argc, char **argv)
 	{
 		if (chdir(argv[1]) == -1)
 		{
-			if (errno == EACCES)
-			{
-				fprintf(stderr, COLOR_RED "./hsh: 1: cd: can't cd to /root\n"RESET);
-			}
+			if (errno == EACCES || errno == ENOENT)
+				fprintf(stderr, COLOR_RED "./hsh: 1: cd: can't cd to %s\n"RESET, argv[1]);
 			else
 				perror("cd");
 			return (1);
