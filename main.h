@@ -23,7 +23,7 @@
 typedef struct historylist_s
 {
 	int id;
-	char *input;
+	char *user_input;
 	struct historylist_s *next;
 	struct historylist_s *prev;
 } historylist_t;
