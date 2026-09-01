@@ -47,5 +47,6 @@ char *_getenv(const char *name);
 int handle_input(char *input, historylist_t *history_head, int *status);
 int handle_condition(char *input, char spec, int *status);
 char *_strtok(char *str, char *spec);
+char *_strdup(char *str);
 
 #endif

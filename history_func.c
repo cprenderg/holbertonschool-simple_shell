@@ -16,7 +16,7 @@ historylist_t *history_func(char *user_input, historylist_t *head)
 	{
 		return (NULL);
 	}
-	new_input = strdup(user_input);
+	new_input = _strdup(user_input);
 	if (new_input == NULL)
 	{
 		free(new_node);

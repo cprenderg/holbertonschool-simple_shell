@@ -12,7 +12,7 @@ int get_argc(char *user_input)
 
 	if (user_input != NULL)
 	{
-		temp = strdup(user_input);
+		temp = _strdup(user_input);
 		token = _strtok(temp, " ");
 		while (token != NULL)
 		{
