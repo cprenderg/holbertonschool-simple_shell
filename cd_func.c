@@ -19,7 +19,7 @@ int cd_func(int argc, char **argv)
 	else if (argc < 2 || strcmp(argv[1], "") == 0)
 	{
 		if (_getenv("HOME") == NULL)
-			return (1);		
+			return (1);
 		getcwd(previous_dir, sizeof(previous_dir));
 		chdir(_getenv("HOME"));
 		return (0);

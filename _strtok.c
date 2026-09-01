@@ -18,7 +18,7 @@ char *_strtok(char *str, char *spec)
 		token = next_token;
 	if (token == NULL)
 		return (NULL);
-	
+
 	i = 0;
 	while (token[i])
 	{
