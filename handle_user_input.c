@@ -10,7 +10,7 @@
  */
 int check_command(int argc, char **argv, historylist_t *history_h, int *status)
 {
-	int i, error = 0;
+	int i = 0, error = 0;
 
 	if (strcmp(argv[0], "exit") == 0)
 	{
