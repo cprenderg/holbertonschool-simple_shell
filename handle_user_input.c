@@ -1,5 +1,36 @@
 #include "main.h"
 /**
+ * _atoi - converts a string to an integer
+ * @argv: the string to convert
+ * Return: converted integer
+ */
+int _atoi(char *argv)
+{
+	int i = 0, sum = 0, neg = 0;
+
+	if (argv[i] == '-')
+	{
+		neg = 1;
+		i++;
+	}
+	while (argv[i])
+	{
+		if (argv[i] >= '0' && argv[i] <= '9')
+		{
+			sum = sum * 10 + (argv[i] - '0');
+			i++;
+		}
+		else 
+		{
+			return (0);
+		}
+	}
+	if (neg == 1)
+		sum = sum * -1;
+	return (sum);
+}
+
+/**
  * check_command - attempts to execute user command
  * @argc: amount of user input
  * @argv: array of pointers to user input
@@ -15,7 +46,7 @@ int check_command(int argc, char **argv, historylist_t *history_h, int *status)
 	if (strcmp(argv[0], "exit") == 0)
 	{
 		if (argv[1] != NULL)
-			*status = strtol(argv[1], NULL, 0);
+			*status = _atoi(argv[1]);
 
 		while (i < argc)
 		{
