@@ -34,7 +34,6 @@ int cd_func(int argc, char **argv);
 void printbanner(void);
 char *getline_reader();
 int exit_func(int argc, char **argv);
-void quick_sort(char **array, size_t size);
 char *readline_reader(void);
 int get_argc(char *input);
 char **get_argv(int argc, char *input);
@@ -45,7 +44,6 @@ int path_execution(char **argv, int *status);
 int function_search(char **argv, int *status);
 void free_history(historylist_t *head);
 char *_getenv(const char *name);
-char *_getenv2(const char *name);
 int handle_input(char *input, historylist_t *history_head, int *status);
 int handle_condition(char *input, char spec, int *status);
 

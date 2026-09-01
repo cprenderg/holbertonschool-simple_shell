@@ -9,12 +9,11 @@
 int function_search(char **argv, int *last_status)
 {
 	char *directory, *temp, *token, path[1024];
-	extern char **environ;
 	int found = 0;
 	pid_t pid = -1;
 	int status;
 
-	temp = _getenv2("PATH");
+	temp = _getenv("PATH");
 	if (temp == NULL)
 		temp = "/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin";
 	directory = stdup(temp);

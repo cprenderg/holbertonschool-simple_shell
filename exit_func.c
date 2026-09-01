@@ -1,4 +1,11 @@
 #include "main.h"
+/**
+ * exit_func - exits shells with a status
+ * @argc: amount of user input
+ * @argv: array of pointers to user input
+ *
+ * Return: Exit status
+ */
 int exit_func(int argc, char **argv)
 {
 	if (argc > 1)

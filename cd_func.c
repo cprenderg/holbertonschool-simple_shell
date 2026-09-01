@@ -18,7 +18,7 @@ int cd_func(int argc, char **argv)
 	}
 	else if (argc < 2)
 	{
-		chdir(_getenv2("HOME"));
+		chdir(_getenv("HOME"));
 		return (0);
 	}
 	if (*argv[1] != '-')

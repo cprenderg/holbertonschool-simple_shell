@@ -1,13 +1,12 @@
 #include "main.h"
 /**
- * _getenv2 - returns the value of an the environment variable
+ * _getenv - returns the value of an the environment variable
  * @name: name of environment variable to get value of
  *
  * Return: pointer to string of environment variable value, or NULL on failure
  */
-char *_getenv2(const char *name)
+char *_getenv(const char *name)
 {
-	extern char **environ;
 	int i, len;
 
 	i = 0;
