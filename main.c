@@ -1,25 +1,26 @@
 #include "main.h"
-
-
-/** static const command_t command_table[] = {
- 		{"exit", exit_func},
- 		{"cd", cd_func}
- 	};*/
-
+/**
+*no_sigint - signal handling for CTRL + C
+*@needstobehere: the integer sent CTRL + C
+*/
 void no_sigint(int needstobehere)
 {
 	char directory_path[1024];
+
 	getcwd(directory_path, sizeof(directory_path));
 	(void)needstobehere;
 	printf("\n%s$ ", directory_path);
 	fflush(stdout);
 }
+/**
+* main - the main file of a simple shell recreation project
+* Return: exit status
+*/
 int main(void)
 {
 	char *user_input, directory_path[1024];
 	int i, command, interactive, want_exit, last_status = 0;
 	historylist_t *history_head;
-	char *specifier_table[] = {"||", "&&", NULL};
 
 	history_head = NULL;
 	signal(SIGINT, no_sigint);
@@ -36,7 +37,7 @@ int main(void)
 			printf("%s$ ", directory_path); /* printing prompt */
 		}
 		user_input = getline_reader();
-		
+
 		if (user_input == NULL)
 			break;
 		if (*user_input == '\n')
@@ -44,23 +45,11 @@ int main(void)
 			free(user_input);
 			continue;
 		}
-
 		history_head = history_func(user_input, history_head);
-
-		while (specifier_table[i] != NULL)
-		{
-			if (strstr(user_input, specifier_table[i]))
-			{
-				want_exit = handle_condition(user_input, *specifier_table[i], &last_status);
-				command = 1;
-			}
-			i++;
-		}
 		if (!command)
-			want_exit = handle_user_input(user_input, history_head, &last_status);
-		
-		free(user_input);
+			want_exit = handle_input(user_input, history_head, &last_status);
 
+		free(user_input);
 		if (want_exit == 1)
 			break;
 	}

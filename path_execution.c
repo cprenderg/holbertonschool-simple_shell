@@ -1,8 +1,13 @@
 #include "main.h"
+/**
+ * path_execution - prints the history list from tail to head
+ * @argv: array of pointers
+ * @last_status: the last status variable to store error codes
+ * Return: void
+ */
 int path_execution(char **argv, int *last_status)
 {
 	int fd;
-	extern char **environ;
 	pid_t pid;
 
 	pid = fork();
@@ -24,11 +29,10 @@ int path_execution(char **argv, int *last_status)
 	}
 	else if (pid == -1)
 		return (1);
-	else
-	{
-		int status;
-		waitpid(pid, &status, 0);
-		*last_status = WEXITSTATUS(status);
-	}
+
+	int status;
+
+	waitpid(pid, &status, 0);
+	*last_status = WEXITSTATUS(status);
 	return (0);
 }

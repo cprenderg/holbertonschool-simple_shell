@@ -38,6 +38,6 @@ historylist_t *history_func(char *user_input, historylist_t *head)
 		head->prev = new_node;
 	}
 	head = new_node;
-	return(new_node);
+	return (new_node);
 }
 
