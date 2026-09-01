@@ -1,7 +1,9 @@
 #include "main.h"
 /**
- * handle_pipe - if user input has a pipe handle appropriately
+ * handle_condition - if user input has a specifier handle appropriately
  * @user_input: what user has entered into stdin
+ * @spec: specifier found
+ * @last_status: last status of shell
  *
  * Return: 0 on success, 1 if want_exit
  */
@@ -13,9 +15,9 @@ int handle_condition(char *user_input, char spec, int *last_status)
 
 	/* finding where the pipe is*/
 	split_point = strchr(user_input, spec);
-	
+
 	*split_point = '\0'; /* splits the string with /0 */
-	left_command = user_input; /* original string but null terminated where | was */
+	left_command = user_input; /* original string null terminated at spec  */
 	right_command = split_point + 2; /* points to string after spec */
 
 	argc_left = get_argc(left_command);

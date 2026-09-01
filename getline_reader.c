@@ -1,9 +1,8 @@
 #include "main.h"
-
 /**
-*getline_reader - reads the standard input
-*Return: pointer to string 
-*/
+ * getline_reader - reads the standard input
+ * Return: pointer to string
+ */
 char *getline_reader()
 {
 	char *buffer;
@@ -11,10 +10,10 @@ char *getline_reader()
 
 	buffer = NULL; /* setting to NULL means getline will allocate the size*/
 	if (getline(&buffer, &buffersize, stdin) == -1)
-	{	
+	{
 		free(buffer);
 		buffer = NULL;
-		return NULL;
+		return (NULL);
 	}
 
 	buffer_len = strlen(buffer);
@@ -23,5 +22,5 @@ char *getline_reader()
 		buffer[buffer_len - 1] = '\0';
 	else
 		buffer[buffer_len] = '\0';
-	return(buffer);
+	return (buffer);
 }

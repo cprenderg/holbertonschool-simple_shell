@@ -10,17 +10,17 @@
 int cd_func(int argc, char **argv)
 {
 	static char previous_dir[1024];
-	
+
 	if (argc > 2)
-    {
-        printf("cd: too many arguments\n");
+	{
+		printf("cd: too many arguments\n");
 		return (1);
-    }
+	}
 	else if (argc < 2)
-    {
+	{
 		chdir(_getenv2("HOME"));
 		return (0);
-    }
+	}
 	if (*argv[1] != '-')
 		getcwd(previous_dir, sizeof(previous_dir));
 	if (*argv[1] == '-')
@@ -32,13 +32,13 @@ int cd_func(int argc, char **argv)
 		strcpy(previous_dir, temp);
 	}
 	else
-    {
-        if (chdir(argv[1]) == -1)
-        {
-            perror("cd");
-            return (1);
-        }
-        return (0);
-    }
-    return (1);
+	{
+		if (chdir(argv[1]) == -1)
+		{
+			perror("cd");
+			return (1);
+		}
+		return (0);
+	}
+	return (1);
 }
