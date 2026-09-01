@@ -31,7 +31,7 @@ typedef struct historylist_s
 extern char **environ;
 
 int cd_func(int argc, char **argv);
-/*void printbanner(void);*/
+void printbanner(void);
 char *getline_reader();
 int exit_func(int argc, char **argv);
 char *readline_reader(void);
@@ -46,5 +46,15 @@ void free_history(historylist_t *head);
 char *_getenv(const char *name);
 int handle_input(char *input, historylist_t *history_head, int *status);
 int handle_condition(char *input, char spec, int *status);
+
+#define RESET   "\033[0m"
+#define COLOR_RED     "\033[31m"
+#define COLOR_GREEN   "\033[38;2;0;255;0m"
+#define COLOR_YELLOW  "\033[33m"
+#define COLOR_BLUE    "\033[34m"
+#define COLOR_MAGENTA "\033[35m"
+#define COLOR_CYAN    "\033[36m"
+#define COLOR_WHITE   "\033[37m"
+#define FONT_BOLD    "\033[1m"
 
 #endif

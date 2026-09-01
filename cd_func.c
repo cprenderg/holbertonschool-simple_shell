@@ -13,7 +13,7 @@ int cd_func(int argc, char **argv)
 
 	if (argc > 2)
 	{
-		printf("cd: too many arguments\n");
+		printf(COLOR_RED"cd: too many arguments\n"RESET);
 		return (1);
 	}
 	else if (argc < 2)

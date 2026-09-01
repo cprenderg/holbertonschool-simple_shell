@@ -28,17 +28,17 @@ int handle_condition(char *user_input, char spec, int *last_status)
 	if (spec == '&')
 	{
 		if (function_search(argv_left, last_status) == 1)
-			printf("'%s': command not found\n", argv_left[0]);
+			printf(COLOR_RED"'%s': command not found\n"RESET, argv_left[0]);
 		if (function_search(argv_right, last_status) == 1)
-			printf("'%s': command not found\n", argv_right[0]);
+			printf(COLOR_RED"'%s': command not found\n"RESET, argv_right[0]);
 	}
 	else if (spec == '|')
 	{
 		if (function_search(argv_left, last_status) == 1)
 		{
-			printf("'%s': command not found\n", argv_left[0]);
+			printf(COLOR_RED"'%s': command not found\n"RESET, argv_left[0]);
 			if ((function_search(argv_right, last_status)) == 1)
-				printf("'%s': command not found\n", argv_right[0]);
+				printf(COLOR_RED"'%s': command not found\n"RESET, argv_right[0]);
 		}
 	}
 

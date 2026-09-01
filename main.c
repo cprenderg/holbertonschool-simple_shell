@@ -9,7 +9,7 @@ void no_sigint(int needstobehere)
 
 	getcwd(directory_path, sizeof(directory_path));
 	(void)needstobehere;
-	printf("\n%s$ ", directory_path);
+	printf(FONT_BOLD COLOR_BLUE"\n%s$ "RESET, directory_path);
 	fflush(stdout);
 }
 /**
@@ -25,10 +25,10 @@ int main(void)
 	history_head = NULL;
 	signal(SIGINT, no_sigint);
 	interactive = isatty(STDIN_FILENO);
-	/**
-	*if (interactive)
-	*	printbanner();
-	*/
+	
+	if (interactive)
+		printbanner();
+	
 
 	while (1)
 	{
@@ -36,7 +36,7 @@ int main(void)
 		if (interactive)
 		{
 			getcwd(directory_path, sizeof(directory_path));
-			printf("%s$ ", directory_path); /* printing prompt */
+			printf( FONT_BOLD COLOR_BLUE"%s$ "RESET, directory_path); /* printing prompt */
 		}
 		user_input = getline_reader();
 
@@ -56,5 +56,6 @@ int main(void)
 			break;
 	}
 	free_history(history_head);
+	printf("\n");
 	return (last_status);
 }
