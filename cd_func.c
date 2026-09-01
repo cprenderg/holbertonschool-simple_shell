@@ -38,7 +38,12 @@ int cd_func(int argc, char **argv)
 	{
 		if (chdir(argv[1]) == -1)
 		{
-			perror("cd");
+			if (errno == EACCES)
+			{
+				fprintf(stderr, "./hsh: 1: cd: can't cd to /root\n");
+			}
+			else
+				perror("cd");
 			return (1);
 		}
 		return (0);
