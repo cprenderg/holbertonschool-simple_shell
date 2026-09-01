@@ -16,7 +16,7 @@
 /**
 *struct historylist_s - node of a doubly linked list
 *@id: number of the entry
-*@input: the command entered
+*@user_input: the command entered
 *@next: pointer to the next node
 *@prev: pointer to previous node
 */
@@ -31,7 +31,7 @@ typedef struct historylist_s
 extern char **environ;
 
 int cd_func(int argc, char **argv);
-void printbanner(void);
+/*void printbanner(void);*/
 char *getline_reader();
 int exit_func(int argc, char **argv);
 char *readline_reader(void);

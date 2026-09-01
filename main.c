@@ -25,8 +25,10 @@ int main(void)
 	history_head = NULL;
 	signal(SIGINT, no_sigint);
 	interactive = isatty(STDIN_FILENO);
-	if (interactive)
-		printbanner();
+	/**
+	*if (interactive)
+	*	printbanner();
+	*/
 
 	while (1)
 	{
