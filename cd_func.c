@@ -16,26 +16,40 @@ int cd_func(int argc, char **argv)
 		printf(COLOR_RED"cd: too many arguments\n"RESET);
 		return (1);
 	}
-	else if (argc < 2)
+	else if (argc < 2 || strcmp(argv[1], "") == 0)
 	{
+		if (_getenv("HOME") == NULL)
+			return (1);
+		getcwd(previous_dir, sizeof(previous_dir));
 		chdir(_getenv("HOME"));
 		return (0);
 	}
 	if (*argv[1] != '-')
 		getcwd(previous_dir, sizeof(previous_dir));
-	if (*argv[1] == '-')
+	if (strcmp(argv[1], "-") == 0)
 	{
 		char temp[1024];
 
 		getcwd(temp, sizeof(temp));
+		if (previous_dir[0] == '\0')
+		{
+			printf("%s\n", temp);
+			return (0);
+		}
 		chdir(previous_dir);
+		printf("%s\n", previous_dir);
 		strcpy(previous_dir, temp);
 	}
 	else
 	{
 		if (chdir(argv[1]) == -1)
 		{
-			perror("cd");
+			if (errno == EACCES)
+			{
+				fprintf(stderr, "./hsh: 1: cd: can't cd to /root\n");
+			}
+			else
+				perror("cd");
 			return (1);
 		}
 		return (0);

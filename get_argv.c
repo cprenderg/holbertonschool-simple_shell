@@ -13,11 +13,11 @@ char **get_argv(int argc, char *user_input)
 	int i = 0;
 
 	argv = malloc((argc + 1) * sizeof(char *));
-	token = strtok(user_input, " ");
+	token = _strtok(user_input, " ");
 	while (token != NULL)
 	{
-		argv[i] = strdup(token);
-		token = strtok(NULL, " ");
+		argv[i] = _strdup(token);
+		token = _strtok(NULL, " ");
 		i++;
 	}
 	argv[i] = NULL;

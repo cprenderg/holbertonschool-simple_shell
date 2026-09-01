@@ -12,12 +12,12 @@ int get_argc(char *user_input)
 
 	if (user_input != NULL)
 	{
-		temp = strdup(user_input);
-		token = strtok(temp, " ");
+		temp = _strdup(user_input);
+		token = _strtok(temp, " ");
 		while (token != NULL)
 		{
 			argc++;
-			token = strtok(NULL, " ");
+			token = _strtok(NULL, " ");
 		}
 		free(temp);
 	}

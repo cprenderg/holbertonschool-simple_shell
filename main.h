@@ -46,6 +46,8 @@ void free_history(historylist_t *head);
 char *_getenv(const char *name);
 int handle_input(char *input, historylist_t *history_head, int *status);
 int handle_condition(char *input, char spec, int *status);
+char *_strtok(char *str, char *spec);
+char *_strdup(char *str);
 
 #define RESET   "\033[0m"
 #define COLOR_RED     "\033[31m"
