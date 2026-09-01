@@ -1,8 +1,9 @@
 #include "main.h"
-/** get_argc - counts the amount of arguments in the input
+/**
+ * get_argc - counts the amount of arguments in the input
  * @user_input: pointer to the input from the user
  *
- * Return: number of arguments in user input\
+ * Return: number of arguments in user input
  */
 int get_argc(char *user_input)
 {

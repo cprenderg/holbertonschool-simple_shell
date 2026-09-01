@@ -1,20 +1,27 @@
 #include "main.h"
+/**
+ * function_search - attempts to execute a user command
+ * @argv: pointer to array of strings of user input
+ * @last_status: last status of shell
+ *
+ * Return: Exit status of child
+ */
 int function_search(char **argv, int *last_status)
 {
 	char *directory, *temp, *token, path[1024];
 	extern char **environ;
 	int found = 0;
 	pid_t pid = -1;
-	
-	if ((temp = _getenv2("PATH")) == NULL)
-		return (1);
-	directory = malloc(strlen(temp) + 1 * sizeof(char));
-	strcpy(directory, temp);
-	token = strtok(directory, ":");
+	int status;
 
+	temp = _getenv2("PATH");
+	if (temp  == NULL)
+		return (1);
+	directory = strdup(temp);
+	token = strtok(directory, ":");
 	while (token != NULL)
 	{
-		sprintf(path,"%s/%s", token, argv[0]);
+		sprintf(path, "%s/%s", token, argv[0]);
 		if (access(path, X_OK) == 0)
 		{
 			found = 1;
@@ -37,7 +44,6 @@ int function_search(char **argv, int *last_status)
 	}
 	else
 	{
-		int status;
 		waitpid(pid, &status, 0);
 		*last_status = WEXITSTATUS(status);
 	}
