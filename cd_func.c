@@ -31,6 +31,8 @@ int cd_func(int argc, char **argv)
 		char temp[1024];
 
 		getcwd(temp, sizeof(temp));
+		if (previous_dir[0] == '\0')
+			return (0);
 		chdir(previous_dir);
 		strcpy(previous_dir, temp);
 	}
