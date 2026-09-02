@@ -12,6 +12,10 @@ int _setenv(char **argv, envlist_t **head, char *user_input)
 	int i, j, var_len, name_len;
 
     old_value = _getenv(argv[1]);
+	if (argv[2] == NULL)
+	{
+		return (1);
+	}
 
 	i = 0;
 	if (old_value == NULL)
