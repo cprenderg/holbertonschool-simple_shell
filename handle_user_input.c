@@ -62,7 +62,7 @@ int check_command(char *user_input, int argc, char **argv, historylist_t *histor
 	else if (strcmp(argv[0], "history") == 0)
 		print_history(history_h);
 	else if (strcmp(argv[0], "setenv") == 0)
-		_setenv(argv, env_head, user_input);
+		_setenv(argv, env_head, user_input, status);
 	else if (strchr(argv[0], '/') != NULL)
 		error = path_execution(argv, status);
 	else if (strcmp(argv[0], "unsetenv") == 0)

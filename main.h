@@ -54,7 +54,7 @@ int handle_input(char *input, historylist_t *history_head, int *status, envlist_
 int handle_condition(char *input, char spec, int *status);
 char *_strtok(char *str, char *spec);
 char *_strdup(char *str);
-int _setenv(char **argv, envlist_t **head, char *user_input);
+int _setenv(char **argv, envlist_t **head, char *user_input, int *status);
 envlist_t *add_node_env(envlist_t **head, char *str);
 void free_env(envlist_t *head);
 
