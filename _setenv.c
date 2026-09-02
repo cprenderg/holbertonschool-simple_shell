@@ -10,9 +10,10 @@ int _setenv(char **argv, envlist_t **head, char *user_input, int *status)
 {
 	char *old_value, *new_value, *temp, *cpy_input, **argv2;
 	int i, j, var_len, name_len;
-
-    old_value = _getenv(argv[1]);
 	
+	if (argv[1] == NULL)
+		return (1);
+
 	if (strcmp(argv[1], "env") == 0)
 	{
 		argv2 = argv;
@@ -20,11 +21,9 @@ int _setenv(char **argv, envlist_t **head, char *user_input, int *status)
 		return (function_search(argv2, status));
 	}
 	if (argv[2] == NULL)
-	{
 		return (1);
-	}
-	
 
+    old_value = _getenv(argv[1]);
 	i = 0;
 	if (old_value == NULL)
 	{
