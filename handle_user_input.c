@@ -40,7 +40,7 @@ int _atoi(char *argv)
  *
  * Return: Error status
  */
-int check_command(int argc, char **argv, historylist_t *history_h, int *status, envlist_t **env_head)
+int check_command(char *user_input, int argc, char **argv, historylist_t *history_h, int *status, envlist_t **env_head)
 {
 	int i = 0, error = 0;
 
@@ -62,7 +62,7 @@ int check_command(int argc, char **argv, historylist_t *history_h, int *status, 
 	else if (strcmp(argv[0], "history") == 0)
 		print_history(history_h);
 	else if (strcmp(argv[0], "setenv") == 0)
-		_setenv(argv, env_head);
+		_setenv(argv, env_head, user_input);
 	else if (strchr(argv[0], '/') != NULL)
 		error = path_execution(argv, status);
 	else if (strcmp(argv[0], "unsetenv") == 0)
@@ -88,12 +88,13 @@ int check_command(int argc, char **argv, historylist_t *history_h, int *status, 
 int handle_input(char *user_input, historylist_t *history_h, int *status, envlist_t **env_head)
 {
 	int argc, i = 0, error = 0;
-	char **argv;
+	char **argv, *temp_input;
 
+	temp_input = _strdup(user_input);
 	argc = get_argc(user_input);/* Getting argc */
 	argv = get_argv(argc, user_input);/* Creating argv */
 
-	error = check_command(argc, argv, history_h, status, env_head);
+	error = check_command(temp_input, argc, argv, history_h, status, env_head);
 
 	i = 0;
 	if (error != 1)
@@ -105,5 +106,6 @@ int handle_input(char *user_input, historylist_t *history_h, int *status, envlis
 		}
 		free(argv);
 	}
+	free(temp_input);
 	return (error);
 }

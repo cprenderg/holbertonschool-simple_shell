@@ -3,7 +3,6 @@
 int _unsetenv(const char *name)
 {
 	int i = 0, len;
-	char *temp = NULL;
 
 	len = strlen(name);
 
