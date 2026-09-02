@@ -63,6 +63,8 @@ int check_command(int argc, char **argv, historylist_t *history_h, int *status)
 		print_history(history_h);
 	else if (strchr(argv[0], '/') != NULL)
 		error = path_execution(argv, status);
+	else if (strcmp(argv[0], "unsetenv") == 0)
+		error = _unsetenv(argv[1]);
 	else
 	{
 		if ((function_search(argv, status)) == 1)

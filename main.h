@@ -49,6 +49,8 @@ int handle_condition(char *input, char spec, int *status);
 char *_strtok(char *str, char *spec);
 char *_strdup(char *str);
 
+int _unsetenv(const char *name);
+
 #define RESET   "\033[0m"
 #define COLOR_RED     "\033[31m"
 #define COLOR_GREEN   "\033[38;2;0;255;0m"
