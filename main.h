@@ -58,7 +58,7 @@ int _setenv(char **argv, envlist_t **head, char *user_input, int *status);
 envlist_t *add_node_env(envlist_t **head, char *str);
 void free_env(envlist_t *head);
 
-int _unsetenv(const char *name);
+int _unsetenv(char **argv, int *status);
 
 #define RESET   "\033[0m"
 #define COLOR_RED     "\033[31m"

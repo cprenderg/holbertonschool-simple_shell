@@ -66,7 +66,7 @@ int check_command(char *user_input, int argc, char **argv, historylist_t *histor
 	else if (strchr(argv[0], '/') != NULL)
 		error = path_execution(argv, status);
 	else if (strcmp(argv[0], "unsetenv") == 0)
-		error = _unsetenv(argv[1]);
+		error = _unsetenv(argv, status);
 	else
 	{
 		if ((function_search(argv, status)) == 1)
