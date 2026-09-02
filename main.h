@@ -28,6 +28,12 @@ typedef struct historylist_s
 	struct historylist_s *prev;
 } historylist_t;
 
+typedef struct envlist_s 
+{
+	char *name;
+	struct envlist_s *next;
+} envlist_t;
+
 extern char **environ;
 
 int cd_func(int argc, char **argv);
@@ -44,10 +50,13 @@ int path_execution(char **argv, int *status);
 int function_search(char **argv, int *status);
 void free_history(historylist_t *head);
 char *_getenv(const char *name);
-int handle_input(char *input, historylist_t *history_head, int *status);
+int handle_input(char *input, historylist_t *history_head, int *status, envlist_t **head);
 int handle_condition(char *input, char spec, int *status);
 char *_strtok(char *str, char *spec);
 char *_strdup(char *str);
+int _setenv(char **argv, envlist_t **head);
+envlist_t *add_node_env(envlist_t **head, char *str);
+void free_env(envlist_t *head);
 
 #define RESET   "\033[0m"
 #define COLOR_RED     "\033[31m"

@@ -29,6 +29,8 @@ int cd_func(int argc, char **argv)
 	{
 		char temp[1024];
 
+		/* use $OLDPWD isntead of previous_dir*/
+
 		getcwd(temp, sizeof(temp));
 		if (previous_dir[0] == '\0')
 		{

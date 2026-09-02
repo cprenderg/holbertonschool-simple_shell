@@ -40,7 +40,7 @@ int _atoi(char *argv)
  *
  * Return: Error status
  */
-int check_command(int argc, char **argv, historylist_t *history_h, int *status)
+int check_command(int argc, char **argv, historylist_t *history_h, int *status, envlist_t **env_head)
 {
 	int i = 0, error = 0;
 
@@ -61,6 +61,8 @@ int check_command(int argc, char **argv, historylist_t *history_h, int *status)
 		cd_func(argc, argv);
 	else if (strcmp(argv[0], "history") == 0)
 		print_history(history_h);
+	else if (strcmp(argv[0], "setenv") == 0)
+		_setenv(argv, env_head);
 	else if (strchr(argv[0], '/') != NULL)
 		error = path_execution(argv, status);
 	else
@@ -81,7 +83,7 @@ int check_command(int argc, char **argv, historylist_t *history_h, int *status)
  *
  * Return: return 0 on success, 1 if want_exit (for now)
  */
-int handle_input(char *user_input, historylist_t *history_h, int *status)
+int handle_input(char *user_input, historylist_t *history_h, int *status, envlist_t **env_head)
 {
 	int argc, i = 0, error = 0;
 	char **argv;
@@ -89,7 +91,7 @@ int handle_input(char *user_input, historylist_t *history_h, int *status)
 	argc = get_argc(user_input);/* Getting argc */
 	argv = get_argv(argc, user_input);/* Creating argv */
 
-	error = check_command(argc, argv, history_h, status);
+	error = check_command(argc, argv, history_h, status, env_head);
 
 	i = 0;
 	if (error != 1)
