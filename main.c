@@ -30,7 +30,6 @@ int main(void)
 	
 	if (interactive)
 		printbanner();
-	
 
 	while (1)
 	{

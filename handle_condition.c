@@ -16,7 +16,6 @@ int handle_condition(char *input, historylist_t *history_h, int *last_status, en
 
 	post_spec = strpbrk(input, specifiers);/* finding where the pipe is*/
 	spec = *post_spec;
-	*post_spec = '\0'; 
 	post_spec += 2;
 	while(input[i] != spec)
 		i++;
