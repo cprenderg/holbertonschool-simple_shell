@@ -21,7 +21,9 @@ int handle_condition(char *input, historylist_t *history_h, int *last_status, en
 		i++;
 	pre_spec = strndup(input, i);
 	if (pre_spec)
-		pre_spec[strlen(pre_spec) - 1] = '\0';
+		pre_spec[strlen(pre_spec)] = '\0';
+	printf("string: %s\n", pre_spec);
+	printf("string: %s\n", post_spec);
 	if (spec == ';')
 	{
 		handle_input(pre_spec, history_h, last_status, head);
