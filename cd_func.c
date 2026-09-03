@@ -66,13 +66,14 @@ int cd_func(int argc, char **argv, envlist_t **env_head, int *status)
 	old_arr[2] = pwd;
 	input = build_input(4, old_arr);
 
-	if (argc < 2 || strcmp(argv[1], "") == 0)
+	if (argc < 2 || argv[1] == NULL)
 	{
 		change_location = _getenv("HOME");
-		if (change_location == NULL)
+		if (change_location[0] == '\0')
 		{
 			free(previous_dir);
 			free(pwd);
+			free(input);
 			return (1);
 		}
 	}
