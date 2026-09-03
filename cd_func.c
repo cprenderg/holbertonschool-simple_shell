@@ -46,7 +46,7 @@ int cd_func(int argc, char **argv)
 		if (chdir(argv[1]) == -1)
 		{
 			if (errno == EACCES || errno == ENOENT)
-				fprintf(stderr, COLOR_RED "./hsh: 1: cd: can't cd to %s\n"RESET, argv[1]);
+				fprintf(stderr, "./hsh: 1: cd: can't cd to %s\n", argv[1]);
 			else
 				perror("cd");
 			return (1);
