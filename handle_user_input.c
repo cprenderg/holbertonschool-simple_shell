@@ -91,7 +91,6 @@ int check_command(char *user_input, int argc, char **argv, historylist_t *histor
  *
  * Return: return 0 on success, 1 if want_exit (for now)
  */
-
 int handle_input(char *input, historylist_t *history_h, int *status, envlist_t **env_head)
 {
 	int argc, i = 0, error = 0;
