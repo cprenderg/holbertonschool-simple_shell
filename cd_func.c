@@ -69,7 +69,7 @@ int cd_func(int argc, char **argv, envlist_t **env_head, int *status)
 	if (argc < 2 || argv[1] == NULL)
 	{
 		change_location = _getenv("HOME");
-		if (change_location[0] == '\0')
+		if (change_location == NULL || change_location[0] == '\0')
 		{
 			free(previous_dir);
 			free(pwd);
