@@ -42,18 +42,12 @@ int _atoi(char *argv)
  */
 int check_command(char *user_input, int argc, char **argv, historylist_t *history_h, int *status, envlist_t **env_head)
 {
-	int i = 0, error = 0;
+	int error = 0;
 
 	if (strcmp(argv[0], "exit") == 0)
 	{
 		if (argv[1] != NULL)
 			*status = _atoi(argv[1]);
-		while (i < argc)
-		{
-			free(argv[i]);
-			i++;
-		}
-		free(argv);
 		return (0);
 	}
 	else if (strcmp(argv[0], "cd") == 0)
@@ -94,13 +88,14 @@ int check_command(char *user_input, int argc, char **argv, historylist_t *histor
 
 int handle_input(char *input, historylist_t *history_h, int *status, envlist_t **env_head)
 {
-	int argc, i = 0, error = 0;
-	char **argv,*temp_input, specifier[] = {'|', '&', ';'};
+	int argc, found_spec = 0, i = 0, error = 0;
+	char **argv, *temp_input, specifier[] = {'|', '&', ';'};
 
 	temp_input = _strdup(input);
 	if (strpbrk(input, specifier))
 	{
 		error = handle_condition(input, history_h, status, env_head);
+		found_spec = 1;
 	}
 	else
 	{
@@ -108,13 +103,16 @@ int handle_input(char *input, historylist_t *history_h, int *status, envlist_t *
 		argv = get_argv(argc, input);/* Creating argv */
 		error = check_command(temp_input, argc, argv, history_h, status, env_head);
 	}
-	i = 0;
-	while (i < argc)
-	{
-		free(argv[i]);
-		i++;
+	if (!found_spec)
+	{	
+		i = 0;
+		while (i < argc)
+		{
+			free(argv[i]);
+			i++;
+		}
+		free(argv);
 	}
-	free(argv);
 	free(temp_input);
 	return (error);
 }
