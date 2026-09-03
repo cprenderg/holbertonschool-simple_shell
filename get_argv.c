@@ -16,12 +16,13 @@ char **get_argv(int argc, char *user_input)
 	token = _strtok(user_input, " ");
 	while (token != NULL)
 	{
-		argv[i] = _strdup(token);
+		if (token [0] != '\0')
+		{
+			argv[i] = _strdup(token);
+			i++;
+		}
 		token = _strtok(NULL, " ");
-		i++;
 	}
 	argv[i] = NULL;
-	if (argv[i - 1][0] == '\0') 
-		argv[i - 1] = NULL;
 	return (argv);
 }

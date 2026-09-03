@@ -74,7 +74,6 @@ int check_command(char *user_input, int argc, char **argv,
 		else if (error > 1)
 		{
 			fflush(stderr);
-			*status = 127;
 			return (1);
 		}
 	}
