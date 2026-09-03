@@ -70,7 +70,7 @@ int check_command(char *user_input, int argc, char **argv, historylist_t *histor
 		}
 		else if (error > 1)
 		{
-			fprintf(stderr, " ");
+			fflush(stderr);
 			*status = 127;
 			return (1);
 		}
