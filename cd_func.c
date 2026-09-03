@@ -78,13 +78,9 @@ int cd_func(int argc, char **argv, envlist_t **env_head, int *status)
 	else if (strcmp(argv[1], "-") == 0)
 	{
 		if (previous_dir[0] == '\0')
-		{
-			printf("%s\n", pwd);
-			free(pwd);
-			free(previous_dir);
-			return (0);
-		}
-		change_location = previous_dir;
+			change_location = pwd;
+		else
+			change_location = previous_dir;
 	}
 	else
 	{
