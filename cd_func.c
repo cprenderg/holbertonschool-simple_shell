@@ -79,7 +79,7 @@ int cd_func(int argc, char **argv, envlist_t **env_head, int *status)
 	}
 	else if (strcmp(argv[1], "-") == 0)
 	{
-		if (previous_dir[0] == '\0')
+		if (previous_dir == NULL || previous_dir[0] == '\0')
 		{
 			_setenv(old_arr, env_head, input, status);
 			free(previous_dir);
