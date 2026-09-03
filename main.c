@@ -27,20 +27,17 @@ int main(void)
 	history_head = NULL;
 	signal(SIGINT, no_sigint);
 	interactive = isatty(STDIN_FILENO);
-	
 	if (interactive)
 		printbanner();
-
 	while (1)
 	{
 		command = want_exit = 0;
 		if (interactive)
 		{
 			getcwd(directory_path, sizeof(directory_path));
-			printf( FONT_BOLD COLOR_BLUE"%s$ "RESET, directory_path); /* printing prompt */
+			printf(FONT_BOLD COLOR_BLUE"%s$ "RESET, directory_path);
 		}
 		user_input = getline_reader();
-
 		if (user_input == NULL)
 			break;
 		if (*user_input == '\n')
@@ -50,14 +47,11 @@ int main(void)
 		}
 		history_head = history_func(user_input, history_head);
 		if (!command)
-			want_exit = handle_input(user_input, history_head, &last_status, &envlist_head);
-
-		if (strstr(user_input, "exit") && want_exit == 0)
-		{
-			free(user_input);
-			break;
-		}
+			want_exit = handle_input(user_input, history_head,
+				&last_status, &envlist_head);
 		free(user_input);
+		if (strstr(user_input, "exit") && want_exit == 0)
+			break;
 	}
 	free_history(history_head);
 	free_env(envlist_head);

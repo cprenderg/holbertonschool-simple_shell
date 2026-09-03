@@ -1,5 +1,11 @@
 #include "main.h"
-
+/**
+ * _unsetenv - removes an environment variable
+ * @argv: array of pointer to strings of user input
+ * @status: status of the shell
+ *
+ * Return: 0 on success, -1 on failure
+ */
 int _unsetenv(char **argv, int *status)
 {
 	int i = 0, len;
@@ -9,7 +15,7 @@ int _unsetenv(char **argv, int *status)
 	if (strcmp(argv[1], "env") == 0)
 	{
 		char *env[] = {"env", NULL};
-		
+
 		return (function_search(env, status));
 	}
 
@@ -29,7 +35,7 @@ int _unsetenv(char **argv, int *status)
 		i++;
 
 	}
-	while(environ[i] != NULL)
+	while (environ[i] != NULL)
 	{
 		environ[i] = environ[i + 1];
 		i++;
