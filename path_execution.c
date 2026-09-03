@@ -17,13 +17,14 @@ int path_execution(char **argv, int *last_status)
 		if (fd != -1)
 		{
 			close(fd);
-			fprintf(stderr,COLOR_RED "Shell V.01: %s: Is a directory\n"RESET, argv[0]);
+			fprintf(stderr, COLOR_RED "Shell V.01: %s: Is a directory\n"RESET, argv[0]);
 			exit(126);
 		}
 		else
 		{
 			execve(argv[0], argv, environ);
-			fprintf(stderr,COLOR_RED "Shell V.01: %s: %s\n"RESET, argv[0], strerror(errno));
+			fprintf(stderr, COLOR_RED "Shell V.01: %s: %s\n"RESET,
+				argv[0], strerror(errno));
 			exit(127);
 		}
 	}
