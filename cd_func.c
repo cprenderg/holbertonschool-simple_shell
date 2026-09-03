@@ -104,7 +104,7 @@ int cd_func(int argc, char **argv, envlist_t **env_head, int *status)
 		return (1);
 	}
 
-	if (strcmp(change_location, previous_dir) == 0)
+	if (previous_dir != NULL && strcmp(change_location, previous_dir) == 0)
 	{
 		free(pwd);
 		pwd = _strdup(change_location);
