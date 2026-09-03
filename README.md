@@ -31,6 +31,6 @@ The following files are included in this project:
 
 
 ## Known limitations
-* NULL
+* If you attempt to cd with no parameters and OLDPWD is home, it will print the home directory.
 ## Advantages
 * Welcomes you with a cool banner when you start the shell in interactive mode

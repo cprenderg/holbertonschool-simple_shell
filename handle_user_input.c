@@ -40,7 +40,7 @@ int _atoi(char *argv)
  *
  * Return: Error status
  */
-int check_command(int argc, char **argv, historylist_t *history_h, int *status)
+int check_command(char *user_input, int argc, char **argv, historylist_t *history_h, int *status, envlist_t **env_head)
 {
 	int i = 0, error = 0;
 
@@ -57,13 +57,15 @@ int check_command(int argc, char **argv, historylist_t *history_h, int *status)
 		return (0);
 	}
 	else if (strcmp(argv[0], "cd") == 0)
-		error = cd_func(argc, argv);
+		cd_func(argc, argv, env_head, status);
 	else if (strcmp(argv[0], "history") == 0)
 		print_history(history_h);
+	else if (strcmp(argv[0], "setenv") == 0)
+		_setenv(argv, env_head, user_input, status);
 	else if (strchr(argv[0], '/') != NULL)
 		error = path_execution(argv, status);
 	else if (strcmp(argv[0], "unsetenv") == 0)
-		error = _unsetenv(argv[1]);
+		error = _unsetenv(argv, status);
 	else
 	{
 		error = function_search(argv, status);
@@ -89,31 +91,30 @@ int check_command(int argc, char **argv, historylist_t *history_h, int *status)
  *
  * Return: return 0 on success, 1 if want_exit (for now)
  */
-int handle_input(char *input, historylist_t *history_h, int *status)
+
+int handle_input(char *input, historylist_t *history_h, int *status, envlist_t **env_head)
 {
-	int argc, i, error = 0;
-	char **argv, specifier[] = {'|', '&', ';'};
-	
+	int argc, i = 0, error = 0;
+	char **argv,*temp_input, specifier[] = {'|', '&', ';'};
+
+	temp_input = _strdup(input);
 	if (strpbrk(input, specifier))
 	{
-		error = handle_condition(input, history_h, status);
+		error = handle_condition(input, history_h, status, env_head);
 	}
 	else
 	{
 		argc = get_argc(input);/* Getting argc */
 		argv = get_argv(argc, input);/* Creating argv */
-
-		error = check_command(argc, argv, history_h, status);
+		error = check_command(temp_input, argc, argv, history_h, status, env_head);
 	}
 	i = 0;
-	if (error != 1)
+	while (i < argc)
 	{
-		while (i < argc)
-		{
-			free(argv[i]);
-			i++;
-		}
-		free(argv);
+		free(argv[i]);
+		i++;
 	}
+	free(argv);
+	free(temp_input);
 	return (error);
 }

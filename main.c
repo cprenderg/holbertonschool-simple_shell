@@ -21,7 +21,9 @@ int main(void)
 	char *user_input, directory_path[1024];
 	int command, interactive, want_exit, last_status = 0;
 	historylist_t *history_head;
+	envlist_t *envlist_head;
 
+	envlist_head = NULL;
 	history_head = NULL;
 	signal(SIGINT, no_sigint);
 	interactive = isatty(STDIN_FILENO);
@@ -49,7 +51,8 @@ int main(void)
 		}
 		history_head = history_func(user_input, history_head);
 		if (!command)
-			want_exit = handle_input(user_input, history_head, &last_status);
+			want_exit = handle_input(user_input, history_head, &last_status, &envlist_head);
+
 		if (strstr(user_input, "exit") && want_exit == 0)
 		{
 			free(user_input);
@@ -58,5 +61,6 @@ int main(void)
 		free(user_input);
 	}
 	free_history(history_head);
+	free_env(envlist_head);
 	return (last_status);
 }

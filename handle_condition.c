@@ -7,7 +7,7 @@
  *
  * Return: 0 on success, 1 if want_exit
  */
-int handle_condition(char *input, historylist_t *history_h, int *last_status)
+int handle_condition(char *input, historylist_t *history_h, int *last_status, envlist_t **head)
 {
 	size_t i = 0;
 	int error = 0;
@@ -25,18 +25,18 @@ int handle_condition(char *input, historylist_t *history_h, int *last_status)
 		pre_spec[strlen(pre_spec) - 1] = '\0';
 	if (spec == ';')
 	{
-		handle_input(pre_spec, history_h, last_status);
-		handle_input(post_spec, history_h, last_status);
+		handle_input(pre_spec, history_h, last_status, head);
+		handle_input(post_spec, history_h, last_status, head);
 	}
 	else if (spec == '&')
 	{
-		if (handle_input(pre_spec, history_h, last_status) == 0)
-			error = handle_input(post_spec, history_h, last_status);
+		if (handle_input(pre_spec, history_h, last_status, head) == 0)
+			error = handle_input(post_spec, history_h, last_status, head);
 	}
 	else if (spec == '|')
 	{
-		if (handle_input(pre_spec, history_h, last_status) == 1)
-			error = handle_input(post_spec, history_h, last_status);
+		if (handle_input(pre_spec, history_h, last_status, head) == 1)
+			error = handle_input(post_spec, history_h, last_status, head);
 	}
 	free(pre_spec);
 	return (error);
