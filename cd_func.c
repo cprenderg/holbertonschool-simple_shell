@@ -38,6 +38,7 @@ int cd_func(int argc, char **argv)
 		chdir(previous_dir);
 		printf("%s\n", previous_dir);
 		strcpy(previous_dir, temp);
+		return (0);
 	}
 	else
 	{

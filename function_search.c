@@ -31,6 +31,8 @@ int function_search(char **argv, int *last_status)
 	free(directory);
 	if (found == 1)
 		pid = fork();
+	else
+	 return (1);
 	if (pid == 0)
 	{
 		signal(SIGINT, SIG_DFL);
@@ -45,6 +47,9 @@ int function_search(char **argv, int *last_status)
 	{
 		waitpid(pid, &status, 0);
 		*last_status = WEXITSTATUS(status);
+		
+		if(status != 0)
+			return (status);
 	}
 	return (0);
 }

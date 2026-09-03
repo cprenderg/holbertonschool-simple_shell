@@ -50,12 +50,13 @@ int main(void)
 		history_head = history_func(user_input, history_head);
 		if (!command)
 			want_exit = handle_input(user_input, history_head, &last_status);
-
-		free(user_input);
-		if (want_exit == 1)
+		if (strstr(user_input, "exit") && want_exit == 0)
+		{
+			free(user_input);
 			break;
+		}
+		free(user_input);
 	}
 	free_history(history_head);
-	printf("\n");
 	return (last_status);
 }

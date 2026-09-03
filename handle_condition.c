@@ -1,48 +1,43 @@
 #include "main.h"
 /**
  * handle_condition - if user input has a specifier handle appropriately
- * @user_input: what user has entered into stdin
+ * @input: what user has entered into stdin
  * @spec: specifier found
  * @last_status: last status of shell
  *
  * Return: 0 on success, 1 if want_exit
  */
-int handle_condition(char *user_input, char spec, int *last_status)
+int handle_condition(char *input, historylist_t *history_h, int *last_status)
 {
-	int argc_left, argc_right;
-	char **argv_left, **argv_right;
-	char *split_point, *left_command, *right_command;
+	size_t i = 0;
+	int error = 0;
+	char *post_spec, *pre_spec;
+	char **argv, spec, specifiers[] = {'|', '&', ';'};
 
-	/* finding where the pipe is*/
-	split_point = strchr(user_input, spec);
-
-	*split_point = '\0'; /* splits the string with /0 */
-	left_command = user_input; /* original string null terminated at spec  */
-	right_command = split_point + 2; /* points to string after spec */
-
-	argc_left = get_argc(left_command);
-	argc_right = get_argc(right_command);
-	argv_left = get_argv(argc_left, left_command);
-	argv_right = get_argv(argc_right, right_command);
-
-	if (spec == '&')
+	post_spec = strpbrk(input, specifiers);/* finding where the pipe is*/
+	spec = *post_spec;
+	*post_spec = '\0'; 
+	post_spec += 2;
+	while(input[i] != spec)
+		i++;
+	pre_spec = strndup(input, i);
+	if (pre_spec)
+		pre_spec[strlen(pre_spec) - 1] = '\0';
+	if (spec == ';')
 	{
-		if (function_search(argv_left, last_status) == 1)
-			printf(COLOR_RED"'%s': command not found\n"RESET, argv_left[0]);
-		if (function_search(argv_right, last_status) == 1)
-			printf(COLOR_RED"'%s': command not found\n"RESET, argv_right[0]);
+		handle_input(pre_spec, history_h, last_status);
+		handle_input(post_spec, history_h, last_status);
+	}
+	else if (spec == '&')
+	{
+		if (handle_input(pre_spec, history_h, last_status) == 0)
+			error = handle_input(post_spec, history_h, last_status);
 	}
 	else if (spec == '|')
 	{
-		if (function_search(argv_left, last_status) == 1)
-		{
-			printf(COLOR_RED"'%s': command not found\n"RESET, argv_left[0]);
-			if ((function_search(argv_right, last_status)) == 1)
-				printf(COLOR_RED"'%s': command not found\n"RESET, argv_right[0]);
-		}
+		if (handle_input(pre_spec, history_h, last_status) == 1)
+			error = handle_input(post_spec, history_h, last_status);
 	}
-
-	free(argv_left);
-	free(argv_right);
-	return (0);
+	free(pre_spec);
+	return (error);
 }
