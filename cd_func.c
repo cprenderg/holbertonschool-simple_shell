@@ -64,6 +64,7 @@ int cd_func(int argc, char **argv, envlist_t **env_head, int *status)
 	previous_dir = _strdup(_getenv("OLDPWD"));
 	pwd = _strdup(_getenv("PWD"));
 	old_arr[2] = pwd;
+	input = build_input(4, old_arr);
 
 	if (argc < 2 || strcmp(argv[1], "") == 0)
 	{
@@ -78,15 +79,17 @@ int cd_func(int argc, char **argv, envlist_t **env_head, int *status)
 	else if (strcmp(argv[1], "-") == 0)
 	{
 		if (previous_dir[0] == '\0')
-			change_location = pwd;
-		else
-			change_location = previous_dir;
+		{
+			_setenv(old_arr, env_head, input, status);
+			free(previous_dir);
+			previous_dir = _strdup(_getenv("OLDPWD"));
+		}
+		change_location = previous_dir;
 	}
 	else
 	{
 		change_location = argv[1];
 	}
-	input = build_input(4, old_arr);
 	_setenv(old_arr, env_head, input, status);
 	if (chdir(change_location) == -1)
 	{
