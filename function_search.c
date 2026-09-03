@@ -41,12 +41,10 @@ int function_search(char **argv, int *last_status)
 	}
 	else if (pid == -1)
 		return (1);
-	else
-	{
-		waitpid(pid, &status, 0);
-		*last_status = WEXITSTATUS(status);
-		if (status != 0)
-			return (status);
-	}
+
+	waitpid(pid, &status, 0);
+	*last_status = WEXITSTATUS(status);
+	if (status != 0)
+		return (status);
 	return (0);
 }

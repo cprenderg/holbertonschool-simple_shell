@@ -49,9 +49,12 @@ int main(void)
 		if (!command)
 			want_exit = handle_input(user_input, history_head,
 				&last_status, &envlist_head);
-		free(user_input);
 		if (strstr(user_input, "exit") && want_exit == 0)
+		{
+			free(user_input);
 			break;
+		}
+		free(user_input);
 	}
 	free_history(history_head);
 	free_env(envlist_head);
