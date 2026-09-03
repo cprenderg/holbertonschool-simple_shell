@@ -1,4 +1,22 @@
 #include "main.h"
+char *_strpbrk(char *string, char *specifiers)
+{
+	int i, j;
+
+	i = 0;
+	while (string[i] != '\0')
+	{
+		j = 0;
+		while (specifiers[j] != '\0')
+		{
+			if (string[i] == specifiers[j])
+				return (string += i);
+			j++;
+		}
+		i++;
+	}
+	return (NULL);
+}
 /**
  * handle_condition - if user input has a specifier handle appropriately
  * @input: what user has entered into stdin
@@ -14,7 +32,7 @@ int handle_condition(char *input, historylist_t *history_h, int *last_status, en
 	char *post_spec, *pre_spec;
 	char spec, specifiers[] = {'|', '&', ';'};
 
-	post_spec = strpbrk(input, specifiers);/* finding where the pipe is*/
+	post_spec = _strpbrk(input, specifiers);/* finding where the pipe is*/
 	spec = *post_spec;
 	post_spec += 2;
 	while(input[i] != spec)
@@ -22,8 +40,6 @@ int handle_condition(char *input, historylist_t *history_h, int *last_status, en
 	pre_spec = strndup(input, i);
 	if (pre_spec)
 		pre_spec[strlen(pre_spec)] = '\0';
-	printf("string: %s\n", pre_spec);
-	printf("string: %s\n", post_spec);
 	if (spec == ';')
 	{
 		handle_input(pre_spec, history_h, last_status, head);
