@@ -1,30 +1,5 @@
 #include "main.h"
 /**
- * _strpbrk - searches a string for any specifier in an array
- * @string: string to find specifier in
- * @specifiers: array of specifiers
- *
- * Return: pointer to the string after the found specifier
- */
-char *_strpbrk(char *string, char *specifiers)
-{
-	int i, j;
-
-	i = 0;
-	while (string[i] != '\0')
-	{
-		j = 0;
-		while (specifiers[j] != '\0')
-		{
-			if (string[i] == specifiers[j])
-				return (string += i);
-			j++;
-		}
-		i++;
-	}
-	return (NULL);
-}
-/**
  * handle_condition - if user input has a specifier handle appropriately
  * @input: what user has entered into stdin
  * @last_status: last status of shell

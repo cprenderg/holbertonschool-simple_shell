@@ -57,6 +57,7 @@ char *_strdup(char *str);
 int _setenv(char **argv, envlist_t **head, char *user_input, int *status);
 envlist_t *add_node_env(envlist_t **head, char *str);
 void free_env(envlist_t *head);
+char *_strpbrk(char *string, char *specifiers);
 
 int _unsetenv(char **argv, int *status);
 

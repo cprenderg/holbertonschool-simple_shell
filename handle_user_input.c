@@ -96,7 +96,7 @@ int handle_input(char *input, historylist_t *history_h,
 	char **argv, *temp_input, specifier[] = {'|', '&', ';'};
 
 	temp_input = _strdup(input);
-	if (strpbrk(input, specifier))
+	if (_strpbrk(input, specifier))
 	{
 		error = handle_condition(input, history_h, status, env_head);
 		found_spec = 1;
