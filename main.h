@@ -28,7 +28,7 @@ typedef struct historylist_s
 	struct historylist_s *prev;
 } historylist_t;
 
-typedef struct envlist_s 
+typedef struct envlist_s
 {
 	char *name;
 	struct envlist_s *next;
@@ -50,8 +50,10 @@ int path_execution(char **argv, int *status);
 int function_search(char **argv, int *status);
 void free_history(historylist_t *history_h);
 char *_getenv(const char *name);
-int handle_condition(char *input, historylist_t *history_h, int *status, envlist_t **head);
-int handle_input(char *input, historylist_t *history_head, int *status, envlist_t **head);
+int handle_condition(char *input, historylist_t *history_h,
+	int *status, envlist_t **head);
+int handle_input(char *input, historylist_t *history_head,
+	int *status, envlist_t **head);
 char *_strtok(char *str, char *spec);
 char *_strdup(char *str);
 int _setenv(char **argv, envlist_t **head, char *user_input, int *status);
