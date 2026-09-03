@@ -58,7 +58,7 @@ int check_command(char *user_input, int argc, char **argv, historylist_t *histor
 		return (1);
 	}
 	else if (strcmp(argv[0], "cd") == 0)
-		cd_func(argc, argv);
+		cd_func(argc, argv, env_head, user_input, status);
 	else if (strcmp(argv[0], "history") == 0)
 		print_history(history_h);
 	else if (strcmp(argv[0], "setenv") == 0)

@@ -36,7 +36,7 @@ typedef struct envlist_s
 
 extern char **environ;
 
-int cd_func(int argc, char **argv);
+int cd_func(int argc, char **argv, envlist_t **env_head, char *user_input, int *status);
 void printbanner(void);
 char *getline_reader();
 int exit_func(int argc, char **argv);

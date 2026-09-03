@@ -1,57 +1,138 @@
 #include "main.h"
 /**
+ * build_input - creates a new string combining argv
+ * @argv: array of pointers to strings of user input
+ * @argc: number of arguments
+ *
+ * Return: pointer to combined string
+ */
+char *build_input(int argc, char **argv)
+{
+	int i, j, mem;
+	char *input;
+
+	i = 0;
+	mem = 0;
+
+	while (i < argc)
+	{
+		j = 0;
+		
+		while (argv[i] != NULL && argv[i][j] != '\0')
+		{
+			j++;
+		}
+		mem += j + 1;
+		i++;
+	}
+
+	input = malloc(mem * sizeof(char));
+	i = 0;
+
+	while (i < argc && argv[i] != NULL)
+	{
+		if (i == 0)
+			sprintf(input, "%s", argv[i]);
+		else
+			sprintf(input, "%s %s", input, argv[i]);
+		i++;
+	}
+
+	return (input);
+}
+
+/**
  * cd_func - changes current working directory
  * @argc: number of arguments
  * @argv: array of arguments
  *
  * Return: 0 on success, 1 on failure
  */
-int cd_func(int argc, char **argv)
+int cd_func(int argc, char **argv, envlist_t **env_head, char *user_input, int *status)
 {
-	static char previous_dir[1024];
-
 	if (argc > 2)
 	{
 		printf(COLOR_RED"cd: too many arguments\n"RESET);
 		return (1);
 	}
-	else if (argc < 2 || strcmp(argv[1], "") == 0)
+
+	char *previous_dir = _strdup(_getenv("OLDPWD"));
+	char *pwd = _strdup(_getenv("PWD"));
+	char *old_arr[] = {"setenv", "OLDPWD", pwd, NULL};
+	char *input, *change_location;
+
+	if (argc < 2 || strcmp(argv[1], "") == 0)
 	{
-		if (_getenv("HOME") == NULL)
+		change_location = _getenv("HOME");
+		if (change_location == NULL)
+		{
+			free(previous_dir);
+			free(pwd);
 			return (1);
-		getcwd(previous_dir, sizeof(previous_dir));
-		chdir(_getenv("HOME"));
-		return (0);
+		}
 	}
-	if (*argv[1] != '-')
-		getcwd(previous_dir, sizeof(previous_dir));
-	if (strcmp(argv[1], "-") == 0)
+	else if (strcmp(argv[1], "-") == 0)
 	{
-		char temp[1024];
-
-		/* use $OLDPWD isntead of previous_dir*/
-
-		getcwd(temp, sizeof(temp));
 		if (previous_dir[0] == '\0')
 		{
-			printf("%s\n", temp);
+			printf("%s\n", pwd);
+			free(pwd);
+			free(previous_dir);
 			return (0);
 		}
-		chdir(previous_dir);
-		printf("%s\n", previous_dir);
-		strcpy(previous_dir, temp);
+		change_location = previous_dir;
 	}
 	else
 	{
-		if (chdir(argv[1]) == -1)
-		{
-			if (errno == EACCES || errno == ENOENT)
-				fprintf(stderr, "./hsh: 1: cd: can't cd to %s\n", argv[1]);
-			else
-				perror("cd");
-			return (1);
-		}
-		return (0);
+		change_location = argv[1];
 	}
-	return (1);
+	input = build_input(4, old_arr);
+	_setenv(old_arr, env_head, input, status);
+	if (chdir(change_location) == -1)
+	{
+		if (errno == EACCES || errno == ENOENT)
+			fprintf(stderr, "./hsh: 1: cd: can't cd to %s\n", change_location);
+		else
+			perror("cd");
+		return (1);
+	}
+
+	if (strcmp(change_location, previous_dir) == 0)
+	{
+		free(pwd);
+		pwd = _strdup(change_location);
+		printf("%s\n", previous_dir);
+	}	
+	else if (strcmp(change_location, _getenv("HOME")) == 0)
+	{
+		free(pwd);
+		pwd = _strdup(_getenv("HOME"));
+	}
+	else if (strcmp(change_location, "..") == 0)
+	{
+		free(pwd);
+		pwd = _strdup(_getenv("OLDPWD"));
+		change_location = strrchr(pwd, '/');
+		*change_location = '\0';
+	}
+	else
+	{
+		char *temp;
+		
+		temp = _strdup(_getenv("OLDPWD"));
+		free(pwd);
+		pwd = malloc(strlen(temp) + strlen(change_location) + 2);
+		sprintf(pwd, "%s/%s", temp, change_location);
+		free(temp);
+	}
+	
+	char *pwd_arr[] = {"setenv", "PWD", pwd, NULL};
+
+	free(input);
+	input = build_input(4, pwd_arr);
+	_setenv(pwd_arr, env_head, input, status);
+	free(previous_dir);
+	free(input);
+	free(pwd);
+	return (0);
 }
