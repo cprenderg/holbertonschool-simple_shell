@@ -21,5 +21,7 @@ char **get_argv(int argc, char *user_input)
 		i++;
 	}
 	argv[i] = NULL;
+	if (argv[i - 1][0] == '\0') 
+		argv[i - 1] = NULL;
 	return (argv);
 }
