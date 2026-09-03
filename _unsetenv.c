@@ -4,7 +4,9 @@ int _unsetenv(char **argv, int *status)
 {
 	int i = 0, len;
 
-	if (argv[1] == NULL || strcmp(argv[1], "env") == 0)
+	if (argv[1] == NULL)
+		return (-1);
+	if (strcmp(argv[1], "env") == 0)
 	{
 		char *env[] = {"env", NULL};
 		
