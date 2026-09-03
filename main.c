@@ -59,6 +59,5 @@ int main(void)
 	}
 	free_history(history_head);
 	free_env(envlist_head);
-	printf("\n");
 	return (last_status);
 }
