@@ -27,14 +27,15 @@ char *build_input(int argc, char **argv)
 	}
 
 	input = malloc(mem * sizeof(char));
+	input[0] = '\0';
 	i = 0;
 
 	while (i < argc && argv[i] != NULL)
 	{
-		if (i == 0)
-			sprintf(input, "%s", argv[i]);
-		else
-			sprintf(input, "%s %s", input, argv[i]);
+		if (i > 0)
+			strcat(input, " ");
+
+		strcat(input, argv[i]);
 		i++;
 	}
 
@@ -48,18 +49,21 @@ char *build_input(int argc, char **argv)
  *
  * Return: 0 on success, 1 on failure
  */
-int cd_func(int argc, char **argv, envlist_t **env_head, char *user_input, int *status)
+int cd_func(int argc, char **argv, envlist_t **env_head, int *status)
 {
+	char *input, *change_location, *previous_dir, *pwd;
+	char *old_arr[4] = {"setenv", "OLDPWD", NULL, NULL};
+	char *pwd_arr[4] = {"setenv", "PWD", NULL, NULL};
+
 	if (argc > 2)
 	{
 		printf(COLOR_RED"cd: too many arguments\n"RESET);
 		return (1);
 	}
 
-	char *previous_dir = _strdup(_getenv("OLDPWD"));
-	char *pwd = _strdup(_getenv("PWD"));
-	char *old_arr[] = {"setenv", "OLDPWD", pwd, NULL};
-	char *input, *change_location;
+	previous_dir = _strdup(_getenv("OLDPWD"));
+	pwd = _strdup(_getenv("PWD"));
+	old_arr[2] = pwd;
 
 	if (argc < 2 || strcmp(argv[1], "") == 0)
 	{
@@ -94,6 +98,9 @@ int cd_func(int argc, char **argv, envlist_t **env_head, char *user_input, int *
 			fprintf(stderr, "./hsh: 1: cd: can't cd to %s\n", change_location);
 		else
 			perror("cd");
+		free(previous_dir);
+		free(pwd);
+		free(input);
 		return (1);
 	}
 
@@ -126,7 +133,7 @@ int cd_func(int argc, char **argv, envlist_t **env_head, char *user_input, int *
 		free(temp);
 	}
 	
-	char *pwd_arr[] = {"setenv", "PWD", pwd, NULL};
+	pwd_arr[2] = pwd;
 
 	free(input);
 	input = build_input(4, pwd_arr);
