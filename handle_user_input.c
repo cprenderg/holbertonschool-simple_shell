@@ -38,6 +38,7 @@ int _atoi(char *argv)
  * @argv: array of pointers to user input
  * @status: variable to store error codes
  * @history_h: head of history list
+ * @env_head: head of env list
  *
  * Return: Error status
  */
@@ -81,9 +82,10 @@ int check_command(char *user_input, int argc, char **argv,
 }
 /**
  * handle_input - attempts to execute user command
- * @user_input: the user input string
+ * @input: the user input string
  * @status: variable to store error codes
  * @history_h: head of history list
+ * @env_head: head of env list
  *
  * Return: return 0 on success, 1 if want_exit (for now)
  */
@@ -106,7 +108,7 @@ int handle_input(char *input, historylist_t *history_h,
 		error = check_command(temp_input, argc, argv, history_h, status, env_head);
 	}
 	if (!found_spec)
-	{	
+	{
 		i = 0;
 		while (i < argc)
 		{
