@@ -12,7 +12,7 @@ int handle_condition(char *input, historylist_t *history_h, int *last_status, en
 	size_t i = 0;
 	int error = 0;
 	char *post_spec, *pre_spec;
-	char **argv, spec, specifiers[] = {'|', '&', ';'};
+	char spec, specifiers[] = {'|', '&', ';'};
 
 	post_spec = strpbrk(input, specifiers);/* finding where the pipe is*/
 	spec = *post_spec;
