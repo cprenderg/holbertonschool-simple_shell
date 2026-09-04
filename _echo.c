@@ -2,7 +2,7 @@
 int _echo(char **argv, int *status, int spaces)
 {
 	pid_t pid = getpid();
-	int argc = 1, i = 0, error = 0;
+	int i = 0, error = 0;
 	char *env;
 
 	if (argv[0] == NULL)
