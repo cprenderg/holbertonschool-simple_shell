@@ -69,7 +69,7 @@ int check_command(char *user_input, int argc, char **argv,
 	else if (strcmp(argv[0], "unsetenv") == 0)
 		error = _unsetenv(argv, status);
 	else if (strcmp(argv[0], "echo") == 0)
-		error = _echo((argv + 1), status, 0);
+		*status = _echo((argv + 1), status, 0);
 	else
 	{
 		error = function_search(argv, status);
