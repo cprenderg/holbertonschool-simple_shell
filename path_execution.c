@@ -17,8 +17,8 @@ int path_execution(char **argv, int *last_status)
 		if (fd != -1)
 		{
 			close(fd);
-			fprintf(stderr, COLOR_RED "Shell V.01: %s: Is a directory\n"RESET, argv[0]);
-			exit(126);
+			fprintf(stderr, COLOR_RED "./hsh: 1: %s: Is a directory\n"RESET, argv[0]);
+			_exit(126);
 		}
 		else
 		{

@@ -32,12 +32,12 @@ int function_search(char **argv, int *last_status)
 	if (found == 1)
 		pid = fork();
 	else
-		return (2);
+		*last_status = 127;
 	if (pid == 0)
 	{
 		signal(SIGINT, SIG_DFL);
 		execve(path, argv, environ);
-		fprintf(stderr, COLOR_RED "Shell V.01: %s: %s\n"RESET,
+		fprintf(stderr, COLOR_RED "./hsh: 1: %s: %s\n"RESET,
 			argv[0], strerror(errno));
 		_exit(127);
 	}

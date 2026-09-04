@@ -70,14 +70,11 @@ int check_command(char *user_input, int argc, char **argv,
 		error = _unsetenv(argv, status);
 	else if (strcmp(argv[0], "echo") == 0)
 		*status = _echo((argv + 1), status, 0);
-	else
-	{
-		error = function_search(argv, status);
-		if (error == 2)
+	else	
+		if (function_search(argv, status) == 113)
 			printf(COLOR_RED"./hsh: 1: %s: not found\n"RESET, argv[0]);
-		else if (error > 2)
+		else if (error > 0)
 			fflush(stderr);
-	}
 	return (error);
 }
 /**

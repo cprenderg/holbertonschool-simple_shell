@@ -1,4 +1,11 @@
 #include "main.h"
+/**
+* _echo - a remade echo function using recursion
+* @argv: all the arguments to be printed
+* @status: variable storing the previous exit status
+* @spaces: lets the function know wether to add a space or not
+* Return: 0 always
+*/
 int _echo(char **argv, int *status, int spaces)
 {
 	pid_t pid = getpid();
@@ -11,7 +18,7 @@ int _echo(char **argv, int *status, int spaces)
 		return (0);
 	}
 
-	if (argv[0][0] == '$' && argv[0][1] != '\0')
+	if (argv[0][0] == '$' && argv[0][1] != '\0') /*checks characters following a '$' char */
 	{
 		if (argv[0][1] == '$')
 			printf("%d", (int)pid);
@@ -20,9 +27,7 @@ int _echo(char **argv, int *status, int spaces)
 		else
 		{
 			env = _getenv(argv[0] + 1);
-			if (env == NULL)
-				;
-			else
+			if (env != NULL)
 				printf("%s", env);
 			error = 1;
 		}
@@ -41,6 +46,6 @@ int _echo(char **argv, int *status, int spaces)
 	if (spaces == 1)
 		putchar(' ');
 	_echo(argv + 1, status, spaces);
-	argv--;
+	argv--; /*walks it back to so it can be freed in user_input*/
 	return (0);
 }

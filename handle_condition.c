@@ -18,28 +18,26 @@ int handle_condition(char *input, historylist_t *history_h,
 
 	post_spec = _strpbrk(input, specifiers);/* finding where the pipe is*/
 	spec = *post_spec;
-	if (spec == ';')
+	if (spec == ';') /* increment once for a ';' otherwise twice*/
 		post_spec++;
 	else
 		post_spec += 2;
 	post_spec_dup = _strdup(post_spec);
-	while (input[i] != spec)
+
+	while (input[i] != spec) /* find length of string before specifier and dup that part*/
 		i++;
 	pre_spec = strndup(input, i);
 
 	handle_input(pre_spec, history_h, status, head);
 	if (spec == ';')
-	{
 		error = handle_input(post_spec_dup, history_h, status, head);
-	}
+
 	else if (spec == '&' && *status == 0)
-	{
 		error = handle_input(post_spec_dup, history_h, status, head);
-	}
+
 	else if (spec == '|' && *status != 0)
-	{
 		error = handle_input(post_spec_dup, history_h, status, head);
-	}
+
 	free(pre_spec);
 	free(post_spec_dup);
 	return (error);
