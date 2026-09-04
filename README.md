@@ -28,6 +28,11 @@ The following files are included in this project:
 | [print_history.c](./print_history.c)          | Prints the history of all user input            |
 |[_strdup.c](./_strdup.c)	| Copies and mallocs a string	|
 |[_strtok.c](./_strtok.c)	| Tokenizes a string	|
+|[_setenv.c]	|	|
+|[_unsetenv.c]	|	|
+|[_strpbrk.c]	|	|
+|	|	|
+
 
 
 ## Known limitations
