@@ -47,6 +47,8 @@ int check_command(char *user_input, int argc, char **argv,
 {
 	int error = 0;
 
+	if(argv[0] == NULL)
+		return (1);
 	if (strcmp(argv[0], "exit") == 0)
 	{
 		if (argv[1] != NULL)
@@ -92,7 +94,7 @@ int handle_input(char *input, historylist_t *history_h,
 	int *status, envlist_t **env_head)
 {
 	int argc, found_spec = 0, i = 0, error = 0;
-	char **argv, *temp_input, specifier[] = {'|', '&', ';'};
+	char **argv, *temp_input, specifier[] = "|&;";
 
 	temp_input = _strdup(input);
 	if (_strpbrk(input, specifier))
@@ -109,7 +111,7 @@ int handle_input(char *input, historylist_t *history_h,
 	if (!found_spec)
 	{
 		i = 0;
-		while (i < argc)
+		while (argv[i] != NULL)
 		{
 			free(argv[i]);
 			i++;
