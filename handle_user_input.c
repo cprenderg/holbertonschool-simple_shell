@@ -1,4 +1,5 @@
 #include "main.h"
+#include <sys/types.h>
 /**
  * _atoi - converts a string to an integer
  * @argv: the string to convert
@@ -67,6 +68,8 @@ int check_command(char *user_input, int argc, char **argv,
 		error = path_execution(argv, status);
 	else if (strcmp(argv[0], "unsetenv") == 0)
 		error = _unsetenv(argv, status);
+	else if (strcmp(argv[0], "echo") == 0)
+		error = _echo(argv, status);
 	else
 	{
 		error = function_search(argv, status);
