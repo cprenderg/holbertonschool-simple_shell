@@ -20,11 +20,9 @@ int main(void)
 {
 	char *user_input, directory_path[1024];
 	int command, interactive, want_exit, last_status = 0;
-	historylist_t *history_head;
-	envlist_t *envlist_head;
+	historylist_t *history_head = NULL;
+	envlist_t *envlist_head = NULL;
 
-	envlist_head = NULL;
-	history_head = NULL;
 	signal(SIGINT, no_sigint);
 	interactive = isatty(STDIN_FILENO);
 	if (interactive)

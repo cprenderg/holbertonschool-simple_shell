@@ -14,6 +14,7 @@ The following files are included in this project:
 | [main.c](./main.c)	|The main function for the simple shell	|
 | [cd_func.c](./cd_func.c)          | Changes directory in shell            |
 | [exit_func.c](./exit_func.c)	|	Called when the user enters "Exit" to exit the shell| 
+| [free_env.c](./free_history.c)          | Frees the env list            |
 | [free_history.c](./free_history.c)          | Frees the history list            |
 | [function_search.c](./function_search.c)          | Checks to see if a function can be accessed and forks a process           |
 | [get_arg.c](./get_argc.c)          | Returns the amount of arguments from user input            |
@@ -26,16 +27,16 @@ The following files are included in this project:
 | [path_execution.c](./path_execution.c)| Checks and executes a program when the user entered the path|
 | [print_banner.c](./print_banner.c)          | Prints the welcome banner on start            |
 | [print_history.c](./print_history.c)          | Prints the history of all user input            |
-|[_strdup.c](./_strdup.c)	| Copies and mallocs a string	|
-|[_strtok.c](./_strtok.c)	| Tokenizes a string	|
-|[_setenv.c]	|	|
-|[_unsetenv.c]	|	|
-|[_strpbrk.c]	|	|
-|	|	|
+| [_setenv.c](./_strdup.c)	| Sets an environment variable	|
+| [_strpbrk.c](./_strpbrk.c)	| Searches for an array of specifiers in a string	|
+| [_strdup.c](./_strdup.c)	| Copies and mallocs a string	|
+| [_strtok.c](./_strtok.c)	| Tokenizes a string	|
+| [_unsetenv.c](./_unsetenv.c)	| Removes an environment variable	|
 
 
 
 ## Known limitations
 * If you attempt to cd with no parameters and OLDPWD is home, it will print the home directory.
+* Treats a single '&' or '|' the same as a double
 ## Advantages
 * Welcomes you with a cool banner when you start the shell in interactive mode

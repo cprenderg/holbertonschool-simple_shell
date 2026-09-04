@@ -1,6 +1,6 @@
 #include "main.h"
 /**
- * free_list - frees a envlist_t list
+ * free_env - frees a envlist_t list
  * @head: head of envlist_t list
  *
  * Return: void

@@ -28,6 +28,11 @@ typedef struct historylist_s
 	struct historylist_s *prev;
 } historylist_t;
 
+/**
+ * struct envlist_s - node of singly linked list
+ * @name: name and value of env variable
+ * @next: pointer to next node in list
+ */
 typedef struct envlist_s
 {
 	char *name;

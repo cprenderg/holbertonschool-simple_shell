@@ -1,6 +1,6 @@
 #include "main.h"
 /**
- * add_node - adds a new node at the beginning of a envlist_t list
+ * add_node_env - adds a new node at the beginning of a envlist_t list
  * @head: pointer to a envlist_t structure
  * @str: string for envlist_t->name
  *
