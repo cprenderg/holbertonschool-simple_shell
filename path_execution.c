@@ -23,16 +23,14 @@ int path_execution(char **argv, int *last_status)
 		else
 		{
 			execve(argv[0], argv, environ);
-			fprintf(stderr, COLOR_RED "Shell V.01: %s: %s\n"RESET,
+			fprintf(stderr, COLOR_RED "./hsh: 1: %s: %s\n"RESET,
 				argv[0], strerror(errno));
 			_exit(127);
 		}
 	}
 	else if (pid == -1)
-	{
 		*last_status = 254;
-		return (1);
-	}
+
 	waitpid(pid, &status, 0);
 	*last_status = WEXITSTATUS(status);
 	return (*last_status);

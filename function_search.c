@@ -32,7 +32,7 @@ int function_search(char **argv, int *last_status)
 	if (found == 1)
 		pid = fork();
 	else
-		return (1);
+		return (2);
 	if (pid == 0)
 	{
 		signal(SIGINT, SIG_DFL);
@@ -42,10 +42,8 @@ int function_search(char **argv, int *last_status)
 		_exit(127);
 	}
 	else if (pid == -1)
-	{
 		*last_status = 254;
-		return (1);
-	}
+
 	waitpid(pid, &status, 0);
 	*last_status = WEXITSTATUS(status);
 	return (*last_status);

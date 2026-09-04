@@ -27,20 +27,18 @@ int handle_condition(char *input, historylist_t *history_h,
 		i++;
 	pre_spec = strndup(input, i);
 
+	handle_input(pre_spec, history_h, status, head);
 	if (spec == ';')
 	{
-		handle_input(pre_spec, history_h, status, head);
 		error = handle_input(post_spec_dup, history_h, status, head);
 	}
-	else if (spec == '&')
+	else if (spec == '&' && *status == 0)
 	{
-		if (handle_input(pre_spec, history_h, status, head) == 0)
-			error = handle_input(post_spec_dup, history_h, status, head);
+		error = handle_input(post_spec_dup, history_h, status, head);
 	}
-	else if (spec == '|')
+	else if (spec == '|' && *status != 0)
 	{
-		if (handle_input(pre_spec, history_h, status, head) == 1)
-			error = handle_input(post_spec_dup, history_h, status, head);
+		error = handle_input(post_spec_dup, history_h, status, head);
 	}
 	free(pre_spec);
 	free(post_spec_dup);

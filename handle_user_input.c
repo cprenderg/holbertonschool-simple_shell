@@ -53,7 +53,9 @@ int check_command(char *user_input, int argc, char **argv,
 	{
 		if (argv[1] != NULL)
 			*status = _atoi(argv[1]);
-		return (0);
+		if (status == 0)
+			return (0);
+		return (1);
 	}
 	else if (strcmp(argv[0], "cd") == 0)
 		cd_func(argc, argv, env_head, status);
@@ -68,16 +70,10 @@ int check_command(char *user_input, int argc, char **argv,
 	else
 	{
 		error = function_search(argv, status);
-		if (error == 1)
-		{
+		if (error == 2)
 			printf(COLOR_RED"./hsh: 1: %s: not found\n"RESET, argv[0]);
-			return (1);
-		}
-		else if (error > 1)
-		{
+		else if (error > 2)
 			fflush(stderr);
-			return (1);
-		}
 	}
 	return (error);
 }
