@@ -24,7 +24,7 @@ int _atoi(char *argv)
 		else
 		{
 			fprintf(stderr, COLOR_RED"./hsh: 1: exit: Illegal number: %s"RESET, argv);
-			return (0);
+			return (1);
 		}
 	}
 	if (neg == 1)
@@ -54,7 +54,7 @@ int check_command(char *user_input, int argc, char **argv,
 	{
 		if (argv[1] != NULL)
 			*status = _atoi(argv[1]);
-		if (status == 0)
+		if (*status == 1)
 			return (0);
 		return (1);
 	}
@@ -69,7 +69,7 @@ int check_command(char *user_input, int argc, char **argv,
 	else if (strcmp(argv[0], "unsetenv") == 0)
 		error = _unsetenv(argv, status);
 	else if (strcmp(argv[0], "echo") == 0)
-		error = _echo(argv, status);
+		error = _echo((argv + 1), status, 0);
 	else
 	{
 		error = function_search(argv, status);
