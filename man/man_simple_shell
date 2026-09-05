@@ -13,9 +13,11 @@ Holberton simple_shell
 
 .SH DESCRIPTION
 
-	Upon running the executable file for the simple_shell in interactive mode a banner will be printed to the terminal window as well as the prompt made up of the CWD found in the environment followed by a '$'. 
+	Upon running the executable file for the simple_shell in interactive mode a banner will be printed to the terminal window as well as the prompt made up 
+	of the CWD found in the environment followed by a '$'. 
 
-	The program will attempt to run any command entered along with valid arguments by comparing against custom functions and searching for it in the $PATH. Where applicable it prints an error.It returns the status code of the last entered command which is always 0 if it was successful.
+	The program will attempt to run any command entered along with valid arguments by comparing against custom functions and searching for it in the $PATH.
+	Where applicable it prints an error.It returns the status code of the last entered command which is always 0 if it was successful.
 
 .SH OPTIONS
 
