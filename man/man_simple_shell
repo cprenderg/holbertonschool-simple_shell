@@ -1,0 +1,53 @@
+.\" Manpage for simple_shell.
+
+.TH man 1 "05 September 2026" "1.0" "simple_shell man page"
+
+.SH NAME
+Holberton simple_shell
+- A simple shell program coded in C with to interact with the linux operating system using already existing programs as well as remade ones
+
+.SH SYNOPSIS
+
+	./hsh
+	$[executable] [arguments]
+
+.SH DESCRIPTION
+
+	Upon running the executable file for the simple_shell in interactive mode a banner will be printed to the terminal window as well as the prompt made up of the CWD found in the environment followed by a '$'. 
+
+	The program will attempt to run any command entered along with valid arguments by comparing against custom functions and searching for it in the $PATH. Where applicable it prints an error.It returns the status code of the last entered command which is always 0 if it was successful.
+
+.SH OPTIONS
+
+	All executables found in $PATH
+	The following are the implemented custom commands:
+
+		- setenv [name] [value] : sets or overwrites an environment variable given its name and value.
+		- unsetenv [name] : removes an environment variable.
+		- cd [name] : changes the current working directory and sets the previous working directory in the environment.
+		- echo [string]: recreated in order to run it with variables like $?, $$ and $PATH. Limited argument options and functionality.
+		- history : prints all commands entered that session
+
+
+.SH SEE ALSO
+
+	$PATH
+
+.SH EXAMPLE
+
+	BASH TERMINAL PROMPT$ ./hsh
+	HOME/dir$ cd man
+	HOME/dir/man$ cd -
+	HOME/dir
+	HOME/dir$ echo $?
+	0
+
+.SH BUGS
+
+	Handles a single '$' and '|' the same way a double occurence works.
+	Pressing "Ctrl D" twice even when there is some text written to the promt will cause the shell to exit.
+
+
+.SH AUTHOR
+
+Christopher Prendergast and Felix Harding
