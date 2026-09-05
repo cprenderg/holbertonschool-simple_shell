@@ -1,0 +1,155 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1320 960" role="img" aria-label="Call graph of the hsh shell, from main's loop down through parsing, dispatch, builtins, execution and shared utilities">
+  <rect x="0" y="0" width="1320" height="960" fill="#F7F8F6"/>
+  <defs>
+    <marker id="am" viewBox="0 0 10 10" refX="8.5" refY="5" markerWidth="6.5" markerHeight="6.5" orient="auto-start-reverse">
+      <path d="M0,0 L10,5 L0,10 z" fill="#8A968E"/>
+    </marker>
+    <marker id="aa" viewBox="0 0 10 10" refX="8.5" refY="5" markerWidth="6.5" markerHeight="6.5" orient="auto-start-reverse">
+      <path d="M0,0 L10,5 L0,10 z" fill="#2A7F7E"/>
+    </marker>
+    <marker id="au" viewBox="0 0 10 10" refX="8.5" refY="5" markerWidth="6.5" markerHeight="6.5" orient="auto-start-reverse">
+      <path d="M0,0 L10,5 L0,10 z" fill="#6B5B95"/>
+    </marker>
+  </defs>
+
+  <g font-family="'IBM Plex Mono', 'SF Mono', Consolas, monospace" font-size="10.5" letter-spacing="1.5" fill="#8A968E">
+    <text x="18" y="59" transform="rotate(-90 18 59)" text-anchor="middle">ENTRY</text>
+    <text x="18" y="165" transform="rotate(-90 18 165)" text-anchor="middle">STARTUP</text>
+    <text x="18" y="340" transform="rotate(-90 18 340)" text-anchor="middle">PARSE</text>
+    <text x="18" y="505" transform="rotate(-90 18 505)" text-anchor="middle">DISPATCH</text>
+    <text x="18" y="670" transform="rotate(-90 18 670)" text-anchor="middle">BUILTINS / EXEC</text>
+    <text x="18" y="870" transform="rotate(-90 18 870)" text-anchor="middle">UTILITIES</text>
+  </g>
+
+  <g fill="none" stroke="#8A968E" stroke-width="1.6">
+    <line x1="660" y1="81" x2="275" y2="143" marker-end="url(#am)"/>
+    <line x1="660" y1="81" x2="473" y2="143" marker-end="url(#am)"/>
+    <line x1="660" y1="81" x2="677" y2="143" marker-end="url(#am)"/>
+    <line x1="660" y1="81" x2="873" y2="143" marker-end="url(#am)"/>
+    <line x1="660" y1="81" x2="1054" y2="143" marker-end="url(#am)"/>
+    <line x1="660" y1="81" x2="660" y2="257" marker-end="url(#am)" stroke-width="2"/>
+
+    <line x1="660" y1="303" x2="464" y2="372" marker-end="url(#am)"/>
+    <line x1="630" y1="303" x2="630" y2="372" marker-end="url(#am)"/>
+    <line x1="660" y1="303" x2="826" y2="372" marker-end="url(#am)"/>
+    <line x1="660" y1="303" x2="660" y2="481" marker-end="url(#am)" stroke-width="2"/>
+
+    <line x1="660" y1="529" x2="135" y2="593" marker-end="url(#am)"/>
+    <line x1="660" y1="529" x2="307" y2="593" marker-end="url(#am)"/>
+    <line x1="660" y1="529" x2="478" y2="593" marker-end="url(#am)"/>
+    <line x1="660" y1="529" x2="652" y2="593" marker-end="url(#am)"/>
+    <line x1="660" y1="529" x2="834" y2="593" marker-end="url(#am)"/>
+    <line x1="660" y1="529" x2="983" y2="593" marker-end="url(#am)"/>
+    <line x1="660" y1="529" x2="1154" y2="593" marker-end="url(#am)"/>
+
+    <line x1="135" y1="637" x2="277" y2="703" marker-end="url(#am)"/>
+    <line x1="135" y1="637" x2="490" y2="703" marker-end="url(#am)"/>
+    <line x1="135" y1="637" x2="697" y2="703" marker-end="url(#am)"/>
+    <path d="M197,608 C 280,568 340,568 416,608" marker-end="url(#am)"/>
+    <line x1="478" y1="637" x2="862" y2="703" marker-end="url(#am)"/>
+    <line x1="478" y1="637" x2="1037" y2="703" marker-end="url(#am)"/>
+  </g>
+
+  <g fill="none" stroke="#2A7F7E" stroke-width="1.8" stroke-dasharray="5 4">
+    <path d="M731,388 C 692,352 700,320 738,300" marker-end="url(#aa)"/>
+    <path d="M1038,607 C1074,592 1074,638 1038,623" marker-end="url(#aa)"/>
+    <path d="M953,157 C 989,142 989,188 953,173" marker-end="url(#aa)"/>
+    <path d="M1119,157 C1155,142 1155,188 1119,173" marker-end="url(#aa)"/>
+  </g>
+  <text x="775" y="345" font-family="'IBM Plex Mono', monospace" font-size="10.5" fill="#2A7F7E" text-anchor="middle">recursion</text>
+
+  <g fill="none" stroke="#6B5B95" stroke-width="2.2" stroke-dasharray="2 6" stroke-linecap="round">
+    <line x1="660" y1="749" x2="660" y2="809" marker-end="url(#au)"/>
+  </g>
+  <text x="685" y="783" font-family="'IBM Plex Mono', monospace" font-size="11" fill="#6B5B95">used throughout builtins, parsing &amp; exec</text>
+
+  <g font-family="'IBM Plex Mono', monospace" font-size="12.5" text-anchor="middle">
+    <g fill="#DCEAE8" stroke="#2A7F7E" stroke-width="1.6">
+      <rect x="600" y="29" width="120" height="52" rx="12"/>
+      <rect x="200" y="143" width="150" height="44" rx="10"/>
+      <rect x="793" y="143" width="160" height="44" rx="10"/>
+      <rect x="989" y="143" width="130" height="44" rx="10"/>
+    </g>
+    <g fill="#123331" font-weight="600">
+      <text x="660" y="60" font-size="14">main()</text>
+      <text x="275" y="169">printbanner()</text>
+      <text x="873" y="169">free_history()</text>
+      <text x="1054" y="169">free_env()</text>
+    </g>
+
+    <g fill="#E7ECE3" stroke="#5B6B63" stroke-width="1.6">
+      <rect x="385" y="143" width="175" height="44" rx="10"/>
+      <rect x="597" y="143" width="160" height="44" rx="10"/>
+      <rect x="580" y="257" width="160" height="46" rx="10"/>
+      <rect x="399" y="372" width="130" height="46" rx="10"/>
+      <rect x="565" y="372" width="130" height="46" rx="10"/>
+      <rect x="731" y="372" width="190" height="46" rx="10"/>
+    </g>
+    <g fill="#232B24" font-weight="600">
+      <text x="473" y="169">getline_reader()</text>
+      <text x="677" y="169">history_func()</text>
+      <text x="660" y="284">handle_input()</text>
+      <text x="464" y="399">get_argc()</text>
+      <text x="630" y="399">get_argv()</text>
+      <text x="826" y="399">handle_condition()</text>
+    </g>
+
+    <g fill="#FCEFD9" stroke="#B98A2E" stroke-width="1.8">
+      <rect x="575" y="481" width="170" height="48" rx="12"/>
+    </g>
+    <text x="660" y="509" fill="#3A2C0C" font-weight="700" font-size="13.5">check_command()</text>
+
+    <g fill="#E4EEE0" stroke="#3F7D4A" stroke-width="1.6">
+      <rect x="72" y="593" width="125" height="44" rx="10"/>
+      <rect x="222" y="593" width="170" height="44" rx="10"/>
+      <rect x="415" y="593" width="125" height="44" rx="10"/>
+      <rect x="764" y="593" width="140" height="44" rx="10"/>
+      <rect x="928" y="593" width="110" height="44" rx="10"/>
+      <rect x="202" y="703" width="150" height="44" rx="10"/>
+      <rect x="382" y="703" width="215" height="44" rx="10"/>
+      <rect x="627" y="703" width="140" height="44" rx="10"/>
+      <rect x="797" y="703" width="130" height="44" rx="10"/>
+      <rect x="957" y="703" width="160" height="44" rx="10"/>
+    </g>
+    <g fill="#173318" font-weight="600">
+      <text x="135" y="619">cd_func()</text>
+      <text x="307" y="619">print_history()</text>
+      <text x="478" y="619">_setenv()</text>
+      <text x="834" y="619">_unsetenv()</text>
+      <text x="983" y="619">_echo()</text>
+      <text x="277" y="729">build_input()</text>
+      <text x="490" y="729" font-size="11.5">get_change_location()</text>
+      <text x="697" y="729">cd_setpwd()</text>
+      <text x="862" y="729">find_pos()</text>
+      <text x="1037" y="729">add_node_env()</text>
+    </g>
+
+    <g fill="#F7E1DA" stroke="#B5482E" stroke-width="1.6">
+      <rect x="564" y="593" width="175" height="44" rx="10"/>
+      <rect x="1061" y="593" width="185" height="44" rx="10"/>
+    </g>
+    <g fill="#3E1509" font-weight="600">
+      <text x="652" y="619">path_execution()</text>
+      <text x="1154" y="619">function_search()</text>
+    </g>
+  </g>
+
+  <rect x="60" y="810" width="1200" height="120" rx="14" fill="#EDEBF5" stroke="#6B5B95" stroke-width="1.6" stroke-dasharray="3 5"/>
+  <text x="80" y="833" font-family="'IBM Plex Mono', monospace" font-size="11" letter-spacing="1" fill="#6B5B95">STRING &amp; ENV UTILITIES</text>
+  <g font-family="'IBM Plex Mono', monospace" font-size="12.5" text-anchor="middle">
+    <g fill="#EDEBF5" stroke="#6B5B95" stroke-width="1.6">
+      <rect x="279" y="849" width="130" height="42" rx="10"/>
+      <rect x="437" y="849" width="130" height="42" rx="10"/>
+      <rect x="595" y="849" width="130" height="42" rx="10"/>
+      <rect x="753" y="849" width="130" height="42" rx="10"/>
+      <rect x="911" y="849" width="130" height="42" rx="10"/>
+    </g>
+    <g fill="#241F38" font-weight="600">
+      <text x="344" y="875">_getenv()</text>
+      <text x="502" y="875">_strdup()</text>
+      <text x="660" y="875">_strtok()</text>
+      <text x="818" y="875">_strpbrk()</text>
+      <text x="976" y="875">_atoi()</text>
+    </g>
+  </g>
+</svg>
