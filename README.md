@@ -36,7 +36,7 @@ The following files are included in this project:
 
 ## Architecture
 
-![hsh function call graph](docs/call-graph.svg)
+![hsh function call graph](call-graph.svg)
 
 ## Known limitations
 * If you attempt to cd with no parameters and OLDPWD is home, it will print the home directory.
