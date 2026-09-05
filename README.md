@@ -34,6 +34,9 @@ The following files are included in this project:
 | [_unsetenv.c](./_unsetenv.c)	| Removes an environment variable	|
 | [_echo.c](./_echo.c)	| A very basic remake of the echo function	|
 
+## Architecture
+
+![hsh function call graph](docs/call-graph.svg)
 
 ## Known limitations
 * If you attempt to cd with no parameters and OLDPWD is home, it will print the home directory.
