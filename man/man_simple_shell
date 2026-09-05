@@ -46,6 +46,7 @@ Holberton simple_shell
 
 .SH BUGS
 
+	If you attempt to cd with no parameters and OLDPWD is home, it will print the home directory.
 	Handles a single '$' and '|' the same way a double occurence works.
 	Pressing "Ctrl D" twice even when there is some text written to the promt will cause the shell to exit.
 

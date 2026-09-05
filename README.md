@@ -39,7 +39,7 @@ The following files are included in this project:
 ![hsh function call graph](call-graph.svg)
 
 ## Known limitations
-* If you attempt to cd with no parameters and OLDPWD is home, it will print the home directory.
+
 * Exits when you press CTRL + D twice if you have already entered text in the terminal
 * Treats a single '&' or '|' the same as a double
 * Limited echo functionality
