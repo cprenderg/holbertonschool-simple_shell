@@ -17,7 +17,7 @@ char *_getenv(const char *name)
 	{
 		if (strncmp(name, environ[i], len) == 0 && environ[i][len] == '=')
 		{
-			return (environ[i] + len + 1);
+			return (environ[i] + len + 1); /* returning env without name or = */
 		}
 	i++;
 	}
