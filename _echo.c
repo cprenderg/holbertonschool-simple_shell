@@ -6,10 +6,10 @@
 * @spaces: lets the function know wether to add a space or not
 * Return: 0 always
 */
-int _echo(char **argv, int *status, int spaces)
+int _echo(char **argv, int *status)
 {
 	pid_t pid = getpid();
-	int i = 0, error = 0;
+	int i = 0, error = 1;
 	char *env;
 
 	if (argv[0] == NULL)
@@ -17,35 +17,29 @@ int _echo(char **argv, int *status, int spaces)
 		putchar('\n');
 		return (0);
 	}
-
-	if (argv[0][0] == '$' && argv[0][1] != '\0') /*checks characters following a '$' char */
+	while (argv[0][i])
 	{
-		if (argv[0][1] == '$')
-			printf("%d", (int)pid);
-		else if (argv[0][1] == '?')
-			printf("%d", *status);
-		else
+		if (argv[0][i] == '$' && argv[0][i + 1] != '\0') /*checks characters following a '$' char */
 		{
-			env = _getenv(argv[0] + 1);
-			if (env != NULL)
+			if (argv[0][i + 1] == '$')
+				error = printf("%d", (int)pid);
+			else if (argv[0][i + 1] == '?')
+				error = printf("%d", *status);
+			else
+			{
+				env = _getenv(argv[0] + i + 1);
+				if (env == NULL)
+					break;
 				printf("%s", env);
-			error = 1;
+			}
+			if (error != 0) /* if anything printed*/
+				i +=2;
 		}
-		i += 2;
+		putchar(argv[0][i]);
+		i++;
 	}
-	while (argv[0][i] && error == 0)
-	{
-		if (argv[0][i] == '"')
-			spaces = 1, i++;
-		else
-		{
-			putchar(argv[0][i]);
-			i++;
-		}
-	}
-	if (spaces == 1)
+	if (argv[1] != NULL)
 		putchar(' ');
-	_echo(argv + 1, status, spaces);
-	argv--; /*walks it back to so it can be freed in user_input*/
+	_echo(argv + 1, status);
 	return (0);
 }

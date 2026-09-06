@@ -47,7 +47,7 @@ int main(void)
 		if (!command)
 			want_exit = handle_input(user_input, history_head,
 				&last_status, &envlist_head);
-		free(user_input);		
+		free(user_input);
 		if (want_exit == 1)
 			break;
 	}

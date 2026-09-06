@@ -18,6 +18,7 @@ int handle_condition(char *input, historylist_t *history_h,
 
 	post_spec = _strpbrk(input, specifiers);/* finding where the pipe is*/
 	spec = *post_spec;
+
 	if (spec == ';') /* increment once for a ';' otherwise twice*/
 		post_spec++;
 	else
@@ -28,8 +29,8 @@ int handle_condition(char *input, historylist_t *history_h,
 		i++;
 	pre_spec = strndup(input, i);
 
-	handle_input(pre_spec, history_h, status, head);
-	if (spec == ';')
+	error = handle_input(pre_spec, history_h, status, head);
+	if (spec == ';' && error != 1)
 		error = handle_input(post_spec_dup, history_h, status, head);
 
 	else if (spec == '&' && *status == 0)

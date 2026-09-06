@@ -16,7 +16,10 @@ int get_argc(char *user_input)
 		token = _strtok(temp, " ");
 		while (token != NULL)
 		{
-			argc++;
+			if (token[0] != '\0')
+			{
+				argc++;
+			}
 			token = _strtok(NULL, " ");
 		}
 		free(temp);

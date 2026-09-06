@@ -27,7 +27,7 @@ Holberton simple_shell
 		- setenv [name] [value] : sets or overwrites an environment variable given its name and value.
 		- unsetenv [name] : removes an environment variable.
 		- cd [name] : changes the current working directory and sets the previous working directory in the environment.
-		- echo [string]: recreated in order to run it with variables like $?, $$ and $PATH. Limited argument options and functionality.
+		- echo [string]: recreated in order to run it with variables like $?, $$ and $PATH. Limited argument options.
 		- history : prints all commands entered that session
 
 

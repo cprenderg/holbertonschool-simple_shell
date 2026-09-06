@@ -8,6 +8,8 @@
 #include <signal.h>
 #include <errno.h>
 #include <fcntl.h>
+#include <sys/types.h>
+
 /*
 *#include <readline/readline.h>
 *#include <readline/history.h>
@@ -65,7 +67,7 @@ int _setenv(char **argv, envlist_t **head, char *user_input, int *status);
 envlist_t *add_node_env(envlist_t **head, char *str);
 void free_env(envlist_t *head);
 char *_strpbrk(char *string, char *specifiers);
-int _echo(char **argv, int *status, int space);
+int _echo(char **argv, int *status);
 int _unsetenv(char **argv, int *status);
 
 #define RESET   "\033[0m"

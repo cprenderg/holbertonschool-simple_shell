@@ -1,5 +1,4 @@
 #include "main.h"
-#include <sys/types.h>
 /**
  * _atoi - converts a string to an integer
  * @argv: the string to convert
@@ -24,7 +23,7 @@ int _atoi(char *argv)
 		else
 		{
 			fprintf(stderr, COLOR_RED"./hsh: 1: exit: Illegal number: %s"RESET, argv);
-			return (1);
+			return (2);
 		}
 	}
 	if (neg == 1)
@@ -48,13 +47,13 @@ int check_command(char *user_input, int argc, char **argv,
 {
 	int error = 0;
 
-	if(argv[0] == NULL)
-		return (1);
+	if (argv[0] == NULL)
+		return (0);
 	if (strcmp(argv[0], "exit") == 0)
 	{
 		if (argv[1] != NULL)
 			*status = _atoi(argv[1]);
-		if (*status == 1)
+		if (*status == 2)/* returned if exit code was invalid so that it doesnt exit*/
 			return (0);
 		return (1);
 	}
@@ -65,16 +64,14 @@ int check_command(char *user_input, int argc, char **argv,
 	else if (strcmp(argv[0], "setenv") == 0)
 		_setenv(argv, env_head, user_input, status);
 	else if (strchr(argv[0], '/') != NULL)
-		error = path_execution(argv, status);
+		path_execution(argv, status);
 	else if (strcmp(argv[0], "unsetenv") == 0)
-		error = _unsetenv(argv, status);
+		_unsetenv(argv, status);
 	else if (strcmp(argv[0], "echo") == 0)
-		*status = _echo((argv + 1), status, 0);
-	else	
-		if (function_search(argv, status) == 113)
+		*status = _echo((argv + 1), status);
+	else
+		if (function_search(argv, status) == 127)
 			printf(COLOR_RED"./hsh: 1: %s: not found\n"RESET, argv[0]);
-		else if (error > 0)
-			fflush(stderr);
 	return (error);
 }
 /**
