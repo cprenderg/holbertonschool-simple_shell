@@ -56,7 +56,7 @@ int _setenv(char **argv, envlist_t **head, char *user_input, int *status)
 	if (argv[2] == NULL)
 		return (1);
 
-	var_pos = find_pos(argv);
+	var_pos = find_pos(argv); /* returns pos for new variable */
 	j = 0;
 	var_len = 0;
 	while (argv[j] != NULL) /* finding memory needed for new env */
@@ -74,7 +74,7 @@ int _setenv(char **argv, envlist_t **head, char *user_input, int *status)
 		k++;
 	}
 	new_value = malloc(var_len + 1);
-	snprintf(new_value, var_len + 1, "%s=%s", argv[1], temp);
+	snprintf(new_value, var_len + 1, "%s=%s", argv[1], temp); /* building var */
 	/* Adds a node into envlist and sets env to that so it can be freed on exit */
 	environ[var_pos] = add_node_env(head, new_value)->name;
 	free(new_value);

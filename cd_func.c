@@ -172,11 +172,11 @@ int cd_func(int argc, char **argv, envlist_t **env_head, int *status)
 		free(input);
 		return (1);
 	}
-	pwd = cd_setpwd(previous_dir, change_location, pwd);
+	pwd = cd_setpwd(previous_dir, change_location, pwd); /* gets pwd after cd */
 	pwd_arr[2] = pwd;
 	free(input);
 	input = build_input(4, pwd_arr);
-	_setenv(pwd_arr, env_head, input, status);
+	_setenv(pwd_arr, env_head, input, status); /* sets new pwd in env */
 	free(previous_dir);
 	free(input);
 	free(pwd);
