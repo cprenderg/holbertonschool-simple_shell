@@ -8,7 +8,7 @@
  */
 char *_strtok(char *str, char *spec)
 {
-	static char *next_token;
+	static char *next_token; /* need to track where next token is between calls */
 	char *token;
 	int i, j;
 
@@ -25,14 +25,14 @@ char *_strtok(char *str, char *spec)
 		j = 0;
 		while (spec[j] != '\0')
 		{
-			if (token[i] == spec[j])
+			if (token[i] == spec[j]) /* finds specifier */
 			{
-				while (token[i] == spec[j])
+				while (token[i] == spec[j]) /* sets all specifier in a row to '\0' */
 				{
 					token[i] = '\0';
 					i++;
 				}
-				next_token = token + i;
+				next_token = token + i; /* sets next_token for subsequent call */
 				return (token);
 			}
 			j++;
