@@ -12,7 +12,7 @@ int _unsetenv(char **argv, int *status)
 
 	if (argv[1] == NULL)
 		return (-1);
-	if (strcmp(argv[1], "env") == 0)
+	if (strcmp(argv[1], "env") == 0) /*returns and runs the env command*/
 	{
 		char *env[] = {"env", NULL};
 		return (function_search(env, status));
@@ -28,10 +28,9 @@ int _unsetenv(char **argv, int *status)
 		if (strncmp(argv[1], environ[i], len) == 0 && environ[i][len] == '=')
 			break;
 		i++;
-
 	}
 	while (environ[i] != NULL)
-	{
+	{ /*overwrites and moves the whole array down one by one*/
 		environ[i] = environ[i + 1];
 		i++;
 	}

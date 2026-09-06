@@ -1,14 +1,14 @@
 #include "main.h"
 /**
 *no_sigint - signal handling for CTRL + C
-*@needstobehere: the integer sent CTRL + C
+*@needstobehere: the integer sent by CTRL + C, unused
 */
 void no_sigint(int needstobehere)
 {
 	char directory_path[1024];
-
-	getcwd(directory_path, sizeof(directory_path));
+	
 	(void)needstobehere;
+	getcwd(directory_path, sizeof(directory_path));
 	printf(FONT_BOLD COLOR_BLUE"\n%s$ "RESET, directory_path);
 	fflush(stdout);
 }
@@ -37,7 +37,7 @@ int main(void)
 		}
 		user_input = getline_reader();
 		if (user_input == NULL)
-			break;
+			break; /*exits if getline fails*/
 		if (*user_input == '\n')
 		{
 			free(user_input);

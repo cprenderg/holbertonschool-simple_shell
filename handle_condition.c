@@ -16,7 +16,7 @@ int handle_condition(char *input, historylist_t *history_h,
 	char *post_spec, *pre_spec, *post_spec_dup;
 	char spec, specifiers[] = "|&;";
 
-	post_spec = _strpbrk(input, specifiers);/* finding where the pipe is*/
+	post_spec = _strpbrk(input, specifiers);/* finding where the specifier is*/
 	spec = *post_spec;
 
 	if (spec == ';') /* increment once for a ';' otherwise twice*/

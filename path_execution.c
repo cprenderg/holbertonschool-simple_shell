@@ -13,24 +13,26 @@ int path_execution(char **argv, int *last_status)
 	pid = fork();
 	if (pid == 0)
 	{
-		fd = open(argv[0], O_DIRECTORY);
+		fd = open(argv[0], O_DIRECTORY); /* check if argv[0] is actually a directory */
 		if (fd != -1)
 		{
 			close(fd);
 			fprintf(stderr, COLOR_RED "./hsh: 1: %s: Is a directory\n"RESET, argv[0]);
-			_exit(126);
+			_exit(126); /* found, but not something we can execute */
 		}
 		else
 		{
 			execve(argv[0], argv, environ);
 			fprintf(stderr, COLOR_RED "./hsh: 1: %s: %s\n"RESET,
-				argv[0], strerror(errno));
+				argv[0], strerror(errno)); /* only reached if execve failed */
 			_exit(127);
 		}
 	}
-	else if (pid == -1)
+	else if (pid == -1) /* fork itself failed */
+	{
 		*last_status = 254;
-
+		return (254);
+	}
 	waitpid(pid, &status, 0);
 	*last_status = WEXITSTATUS(status);
 	return (*last_status);

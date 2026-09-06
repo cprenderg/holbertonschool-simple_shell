@@ -43,6 +43,9 @@ The following files are included in this project:
 * Exits when you press CTRL + D twice if you have already entered text in the terminal
 * Treats a single '&' or '|' the same as a double
 * Limited echo functionality
+* No arrow-key history recall, tab completion or similar functions you get with "readline"
+* History is per session only
+* No I/O redirection
 
 ## Advantages
 * Welcomes you with a cool banner when you start the shell in interactive mode

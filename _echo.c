@@ -12,7 +12,7 @@ int _echo(char **argv, int *status)
 	int i = 0, error = 1;
 	char *env;
 
-	if (argv[0] == NULL)
+	if (argv[0] == NULL) /*recursion eventually gets here*/
 	{
 		putchar('\n');
 		return (0);
@@ -38,7 +38,7 @@ int _echo(char **argv, int *status)
 		putchar(argv[0][i]);
 		i++;
 	}
-	if (argv[1] != NULL)
+	if (argv[1] != NULL) /* if theres a following argument*/
 		putchar(' ');
 	_echo(argv + 1, status);
 	return (0);
